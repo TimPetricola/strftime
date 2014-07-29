@@ -1,0 +1,126 @@
+<!doctype>
+<html>
+  <head>
+    <meta charset=utf-8>
+    <title>Strftime Helper</title>
+    <link type='text/css' rel='stylesheet' href='style.css'>
+  </head>
+  <body>
+    <h1 class='page-title'>Strftime Helper</h1>
+    <div id='app' class='section section--full'></div>
+    <div class='section'>
+      <h2>Supported codes</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Code</th>
+            <th>Meaning</th>
+            <th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-code='%a'>
+            <td><code>%a</code></td>
+            <td>Weekday as locale’s abbreviated name.</td>
+            <td><code>Mon</code></td>
+          </tr>
+          <tr data-code='%A'>
+            <td><code>%A</code></td>
+            <td>Full weekday name</td>
+            <td><code>Monday</code></td>
+          </tr>
+          <tr data-code='%w'>
+            <td><code>%w</code></td>
+            <td>The weekday, Sunday as the first day of the week (0-6)</td>
+            <td><code>1</code></td>
+          </tr>
+          <tr data-code='%d'>
+            <td><code>%d</code></td>
+            <td>Day of the month, padded to 2 digits (01-31)</td>
+            <td><code>28</code></td>
+          </tr>
+          <tr data-code='%b'>
+            <td><code>%b</code></td>
+            <td>Abbreviated month name</td>
+            <td><code>Jul</code></td>
+          </tr>
+          <tr data-code='%B'>
+            <td><code>%B</code></td>
+            <td>Full month name</td>
+            <td><code>July</code></td>
+          </tr>
+          <tr data-code='%m'>
+            <td><code>%m</code></td>
+            <td>The month, padded to 2 digits (01-12)</td>
+            <td><code>07</code></td>
+          </tr>
+          <tr data-code='%y'>
+            <td><code>%y</code></td>
+            <td>The year without the century (00-99)</td>
+            <td><code>14</code></td>
+          </tr>
+          <tr data-code='%Y'>
+            <td><code>%Y</code></td>
+            <td>The year with the century</td>
+            <td><code>2014</code></td>
+          </tr>
+          <tr data-code='%H'>
+            <td><code>%H</code></td>
+            <td>The hour (24-hour clock), padded to 2 digits (00-23)</td>
+            <td><code>18</code></td>
+          </tr>
+          <tr data-code='%I'>
+            <td><code>%I</code></td>
+            <td>The hour (12-hour clock), padded to 2 digits (01-12)</td>
+            <td><code>06</code></td>
+          </tr>
+          <tr data-code='%p'>
+            <td><code>%p</code></td>
+            <td>"AM" or "PM"</td>
+            <td><code>PM</code></td>
+          </tr>
+          <tr data-code='%M'>
+            <td><code>%M</code></td>
+            <td>The minute, padded to 2 digits (00-59)</td>
+            <td><code>01</code></td>
+          </tr>
+          <tr data-code='%S'>
+            <td><code>%S</code></td>
+            <td>The second, padded to 2 digits (00-60)</td>
+            <td><code>36</code></td>
+          </tr>
+          <tr data-code='%z'>
+            <td><code>%z</code></td>
+            <td>The time zone offset from UTC, with a leading plus sign for UTC and zones east of UTC and a minus sign for those west of UTC, hours and minutes follow each padded to 2 digits and with no delimiter between them</td>
+            <td><code>-0400</code></td>
+          </tr>
+          <tr data-code='%Z'>
+            <td><code>%Z</code></td>
+            <td>The time zone name, replaced with an empty string if it is not found</td>
+            <td><code>EDT</code></td>
+          </tr>
+          <tr data-code='%j'>
+            <td><code>%j</code></td>
+            <td>Day of the year, padded to 3 digits (001-366)</td>
+            <td><code>209</code></td>
+          </tr>
+          <tr data-code='%U'>
+            <td><code>%U</code></td>
+            <td>Week number of the year, Sunday as the first day of the week, padded to 2 digits (00-53)</td>
+            <td><code>30</code></td>
+          </tr>
+          <tr data-code='%W'>
+            <td><code>%W</code></td>
+            <td>Week number of the year, Monday as the first day of the week, padded to 2 digits (00-53)</td>
+            <td><code>30</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/react/0.11.0/react.js'></script>
+    <script src='//cdnjs.cloudflare.com/ajax/libs/react/0.11.0/JSXTransformer.js'></script>
+    <script src='randomColor.js'></script>
+    <script src='strftime.js'></script>
+    <script src='app.jsx' type='text/jsx'></script>
+  </body>
+</html>

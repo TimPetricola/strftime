@@ -1,0 +1,114 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  width: 700px;
+  max-width: 100%;
+  margin: 0 auto;
+  background-color: #26272a;
+}
+
+code {
+  font-family: Monaco, Consolas, "Lucida Console", monospace;
+}
+
+.page-title {
+  font-size: 1.4em;
+  color: #fff;
+  text-align: center;
+  margin: 1em 0;
+}
+
+.section {
+  background-color: #fff;
+  padding: 2em;
+  margin-bottom: 2em;
+}
+  .section--full {
+    padding: 0;
+  }
+
+th {
+  font-weight: bold;
+}
+
+.date-input {
+  position: relative;
+  text-align: center;
+  font-size: 1.4em;
+  border-bottom: 2px solid #eee;
+}
+  .date-input__highlighter, .date-input__editor {
+    padding: .8em;
+  }
+
+  .date-input__editor {
+    position: relative;
+    outline: none;
+  }
+
+  .date-input__highlighter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    color: transparent;
+  }
+
+.result {
+  text-align: center;
+  padding: .8em;
+  font-size: 1.4em;
+}
