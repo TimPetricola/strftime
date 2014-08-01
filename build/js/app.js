@@ -116,7 +116,7 @@ module.exports= React.createClass({displayName: 'exports',
       this.props.onChange(value);
     },
 
-    getWysisygContent: function() {
+    getColoredContent: function() {
       return this.state.value.split(this.props.regex).map(function(part, i) {
         if(part.match(this.props.regex)) {
           return (
@@ -134,7 +134,7 @@ module.exports= React.createClass({displayName: 'exports',
       return (
         React.DOM.div( {className:"date-input", style:{position: 'relative'}}, 
           React.DOM.code(null, 
-            React.DOM.div( {className:"date-input__highlighter"}, this.getWysisygContent()),
+            React.DOM.div( {className:"date-input__highlighter"}, this.getColoredContent()),
             ContentEditable( {className:"date-input__editor", onChange:this.handleChange}, this.state.value)
           )
         )

@@ -61,7 +61,7 @@
       this.props.onChange(value);
     },
 
-    getWysisygContent: function() {
+    getColoredContent: function() {
       return this.state.value.split(this.props.regex).map(function(part, i) {
         if(part.match(this.props.regex)) {
           return (
@@ -79,7 +79,7 @@
       return (
         <div className='date-input' style={{position: 'relative'}}>
           <code>
-            <div className='date-input__highlighter'>{this.getWysisygContent()}</div>
+            <div className='date-input__highlighter'>{this.getColoredContent()}</div>
             <ContentEditable className='date-input__editor' onChange={this.handleChange}>{this.state.value}</ContentEditable>
           </code>
         </div>
