@@ -77,7 +77,7 @@
 
     render: function() {
       return (
-        <div className='date-input' style={{position: 'relative'}}>
+        <div className='date-input'>
           <code>
             <div className='date-input__highlighter'>{this.getColoredContent()}</div>
             <ContentEditable className='date-input__editor' onChange={this.handleChange}>{this.state.value}</ContentEditable>

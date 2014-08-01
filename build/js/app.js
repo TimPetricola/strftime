@@ -132,7 +132,7 @@ module.exports= React.createClass({displayName: 'exports',
 
     render: function() {
       return (
-        React.DOM.div( {className:"date-input", style:{position: 'relative'}}, 
+        React.DOM.div( {className:"date-input"}, 
           React.DOM.code(null, 
             React.DOM.div( {className:"date-input__highlighter"}, this.getColoredContent()),
             ContentEditable( {className:"date-input__editor", onChange:this.handleChange}, this.state.value)
