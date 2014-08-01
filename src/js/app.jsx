@@ -1,7 +1,8 @@
 /** @jsx React.DOM */
 (function(React) {
   var ContentEditable = require('./content-editable'),
-      ColoredText     = require('./colored-text');
+      ColoredText     = require('./colored-text'),
+      FormattedDate   = require('./formatted-date');
 
   var App = {
     init: function() {
@@ -82,30 +83,6 @@
             <ContentEditable className='date-input__editor' onChange={this.handleChange}>{this.state.value}</ContentEditable>
           </code>
         </div>
-      );
-    }
-  });
-
-  var FormattedDate = React.createClass({
-    getInitialState: function() {
-      return {
-        date: new Date()
-      };
-    },
-
-    componentDidMount: function() {
-      setInterval(function () {
-        this.setState({date: new Date()});
-      }.bind(this), 10);
-    },
-
-    getFormattedDate: function() {
-      return strftime(this.props.format, this.state.date);
-    },
-
-    render: function() {
-      return this.transferPropsTo(
-       <span>{this.getFormattedDate()}</span>
       );
     }
   });

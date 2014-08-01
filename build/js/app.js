@@ -56,7 +56,8 @@ module.exports= React.createClass({displayName: 'exports',
 /** @jsx React.DOM */
 (function(React) {
   var ContentEditable = require('./content-editable'),
-      ColoredText     = require('./colored-text');
+      ColoredText     = require('./colored-text'),
+      FormattedDate   = require('./formatted-date');
 
   var App = {
     init: function() {
@@ -141,30 +142,6 @@ module.exports= React.createClass({displayName: 'exports',
     }
   });
 
-  var FormattedDate = React.createClass({displayName: 'FormattedDate',
-    getInitialState: function() {
-      return {
-        date: new Date()
-      };
-    },
-
-    componentDidMount: function() {
-      setInterval(function () {
-        this.setState({date: new Date()});
-      }.bind(this), 10);
-    },
-
-    getFormattedDate: function() {
-      return strftime(this.props.format, this.state.date);
-    },
-
-    render: function() {
-      return this.transferPropsTo(
-       React.DOM.span(null, this.getFormattedDate())
-      );
-    }
-  });
-
   var FormattedPart = React.createClass({displayName: 'FormattedPart',
     render: function() {
       if(this.props.content.match(this.props.regex)) {
@@ -238,4 +215,30 @@ module.exports= React.createClass({displayName: 'exports',
 
 })(React);
 
-},{"./colored-text":1,"./content-editable":2}]},{},[3])
+},{"./colored-text":1,"./content-editable":2,"./formatted-date":4}],4:[function(require,module,exports){
+/** @jsx React.DOM */
+module.exports = React.createClass({displayName: 'exports',
+  getInitialState: function() {
+    return {
+      date: new Date()
+    };
+  },
+
+  componentDidMount: function() {
+    setInterval(function () {
+      this.setState({date: new Date()});
+    }.bind(this), 10);
+  },
+
+  getFormattedDate: function() {
+    return strftime(this.props.format, this.state.date);
+  },
+
+  render: function() {
+    return this.transferPropsTo(
+     React.DOM.span(null, this.getFormattedDate())
+    );
+  }
+});
+
+},{}]},{},[3])
