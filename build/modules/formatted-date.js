@@ -15,9 +15,13 @@ module.exports = React.createClass({
   },
 
   componentDidMount: function() {
-    setInterval(function () {
+    this.timeInterval = setInterval(function () {
       this.setState({date: new Date()});
     }.bind(this), 10);
+  },
+
+  componentWillUnmount: function() {
+    clearInterval(this.timeInterval);
   },
 
   getFormattedDate: function() {
