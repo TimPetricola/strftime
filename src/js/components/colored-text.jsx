@@ -1,15 +1,19 @@
 var Colors = require('./colors-dict');
 
 module.exports = React.createClass({
-  getColor: function() {
-    return Colors.get(this.props.for);
-  },
+  displayName: 'ColoredText',
 
   render: function() {
+    var style = {backgroundColor: this.getColor()};
+
     return (
-      <span style={{backgroundColor: this.getColor()}}>
+      <span style={style}>
         {this.props.children}
       </span>
     );
+  },
+
+  getColor: function() {
+    return Colors.get(this.props.for);
   }
 });

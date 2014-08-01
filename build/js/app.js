@@ -2,17 +2,21 @@
 /** @jsx React.DOM */
 var Colors = require('./colors-dict');
 
-module.exports = React.createClass({displayName: 'exports',
-  getColor: function() {
-    return Colors.get(this.props.for);
-  },
+module.exports = React.createClass({
+  displayName: 'ColoredText',
 
   render: function() {
+    var style = {backgroundColor: this.getColor()};
+
     return (
-      React.DOM.span( {style:{backgroundColor: this.getColor()}}, 
+      React.DOM.span( {style:style}, 
         this.props.children
       )
     );
+  },
+
+  getColor: function() {
+    return Colors.get(this.props.for);
   }
 });
 
@@ -33,7 +37,17 @@ module.exports = {
 },{}],3:[function(require,module,exports){
 /** @jsx React.DOM */
 // http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
-module.exports= React.createClass({displayName: 'exports',
+module.exports= React.createClass({
+  displayName: 'ContentEditable',
+
+  render: function(){
+    return this.transferPropsTo(
+      React.DOM.div( {contentEditable:true,
+           onInput:this.emitChange,
+           onBlur:this.emitChange}, this.props.children)
+    );
+  },
+
   shouldComponentUpdate: function(nextProps){
     return nextProps.html !== this.getDOMNode().innerHTML;
   },
@@ -44,15 +58,8 @@ module.exports= React.createClass({displayName: 'exports',
       this.props.onChange(html);
     }
     this.lastHtml = html;
-  },
-
-  render: function(){
-    return this.transferPropsTo(
-      React.DOM.div( {contentEditable:true,
-           onInput:this.emitChange,
-           onBlur:this.emitChange}, this.props.children)
-    );
   }
+
 });
 
 },{}],4:[function(require,module,exports){
@@ -213,11 +220,19 @@ module.exports= React.createClass({displayName: 'exports',
 
 },{"./colored-text":1,"./content-editable":3,"./formatted-date":5}],5:[function(require,module,exports){
 /** @jsx React.DOM */
-module.exports = React.createClass({displayName: 'exports',
+module.exports = React.createClass({
+  displayName: 'FormattedDate',
+
   getInitialState: function() {
     return {
       date: new Date()
     };
+  },
+
+  render: function() {
+    return this.transferPropsTo(
+     React.DOM.span(null, this.getFormattedDate())
+    );
   },
 
   componentDidMount: function() {
@@ -228,12 +243,6 @@ module.exports = React.createClass({displayName: 'exports',
 
   getFormattedDate: function() {
     return strftime(this.props.format, this.state.date);
-  },
-
-  render: function() {
-    return this.transferPropsTo(
-     React.DOM.span(null, this.getFormattedDate())
-    );
   }
 });
 

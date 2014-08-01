@@ -1,8 +1,16 @@
 module.exports = React.createClass({
+  displayName: 'FormattedDate',
+
   getInitialState: function() {
     return {
       date: new Date()
     };
+  },
+
+  render: function() {
+    return this.transferPropsTo(
+     <span>{this.getFormattedDate()}</span>
+    );
   },
 
   componentDidMount: function() {
@@ -13,11 +21,5 @@ module.exports = React.createClass({
 
   getFormattedDate: function() {
     return strftime(this.props.format, this.state.date);
-  },
-
-  render: function() {
-    return this.transferPropsTo(
-     <span>{this.getFormattedDate()}</span>
-    );
   }
 });

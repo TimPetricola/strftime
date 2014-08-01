@@ -1,9 +1,17 @@
 /** @jsx React.DOM */
-module.exports = React.createClass({displayName: 'exports',
+module.exports = React.createClass({
+  displayName: 'FormattedDate',
+
   getInitialState: function() {
     return {
       date: new Date()
     };
+  },
+
+  render: function() {
+    return this.transferPropsTo(
+     React.DOM.span(null, this.getFormattedDate())
+    );
   },
 
   componentDidMount: function() {
@@ -14,11 +22,5 @@ module.exports = React.createClass({displayName: 'exports',
 
   getFormattedDate: function() {
     return strftime(this.props.format, this.state.date);
-  },
-
-  render: function() {
-    return this.transferPropsTo(
-     React.DOM.span(null, this.getFormattedDate())
-    );
   }
 });
