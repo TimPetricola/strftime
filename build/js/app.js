@@ -1,5 +1,34 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /** @jsx React.DOM */
+var Colors = {
+  colors: {},
+
+  get: function(key) {
+    this.colors[key] = this.colors[key] || this.getRandomColor();
+    return this.colors[key];
+  },
+
+  getRandomColor: function() {
+    return randomColor({luminosity: 'light'});
+  }
+};
+
+module.exports = React.createClass({displayName: 'exports',
+  getColor: function() {
+    return Colors.get(this.props.for);
+  },
+
+  render: function() {
+    return (
+      React.DOM.span( {style:{backgroundColor: this.getColor()}}, 
+        this.props.children
+      )
+    );
+  }
+});
+
+},{}],2:[function(require,module,exports){
+/** @jsx React.DOM */
 // http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
 module.exports= React.createClass({displayName: 'exports',
   shouldComponentUpdate: function(nextProps){
@@ -23,10 +52,11 @@ module.exports= React.createClass({displayName: 'exports',
   }
 });
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 /** @jsx React.DOM */
-(function(React, RandomColor) {
-  var ContentEditable = require('./content-editable');
+(function(React) {
+  var ContentEditable = require('./content-editable'),
+      ColoredText     = require('./colored-text');
 
   var App = {
     init: function() {
@@ -73,33 +103,6 @@ module.exports= React.createClass({displayName: 'exports',
       );
     }
   };
-
-  var Colors = {
-    colors: {},
-
-    get: function(key) {
-      this.colors[key] = this.colors[key] || this.getRandomColor();
-      return this.colors[key];
-    },
-
-    getRandomColor: function() {
-      return RandomColor({luminosity: 'light'});
-    }
-  };
-
-  var ColoredText = React.createClass({displayName: 'ColoredText',
-    getColor: function() {
-      return Colors.get(this.props.for);
-    },
-
-    render: function() {
-      return (
-        React.DOM.span( {style:{backgroundColor: this.getColor()}}, 
-          this.props.children
-        )
-      );
-    }
-  });
 
   var FormatInput = React.createClass({displayName: 'FormatInput',
     getInitialState: function() {
@@ -234,6 +237,6 @@ module.exports= React.createClass({displayName: 'exports',
 
   App.init();
 
-})(React, randomColor);
+})(React);
 
-},{"./content-editable":1}]},{},[2])
+},{"./colored-text":1,"./content-editable":2}]},{},[3])

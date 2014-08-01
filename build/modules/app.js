@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
-(function(React, RandomColor) {
-  var ContentEditable = require('./content-editable');
+(function(React) {
+  var ContentEditable = require('./content-editable'),
+      ColoredText     = require('./colored-text');
 
   var App = {
     init: function() {
@@ -47,33 +48,6 @@
       );
     }
   };
-
-  var Colors = {
-    colors: {},
-
-    get: function(key) {
-      this.colors[key] = this.colors[key] || this.getRandomColor();
-      return this.colors[key];
-    },
-
-    getRandomColor: function() {
-      return RandomColor({luminosity: 'light'});
-    }
-  };
-
-  var ColoredText = React.createClass({displayName: 'ColoredText',
-    getColor: function() {
-      return Colors.get(this.props.for);
-    },
-
-    render: function() {
-      return (
-        React.DOM.span( {style:{backgroundColor: this.getColor()}}, 
-          this.props.children
-        )
-      );
-    }
-  });
 
   var FormatInput = React.createClass({displayName: 'FormatInput',
     getInitialState: function() {
@@ -208,4 +182,4 @@
 
   App.init();
 
-})(React, randomColor);
+})(React);
