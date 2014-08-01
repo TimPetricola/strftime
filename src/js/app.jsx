@@ -91,12 +91,12 @@
       var parts = this.props.content.split(this.props.regex).map(function(part, i) {
         if(part.match(this.props.regex)) {
           return (
-            <ColoredText for={part}>
+            <ColoredText for={part} key={i}>
               <FormattedDate format={part} />
             </ColoredText>
           );
         } else {
-          return <span>{part}</span>;
+          return <span key={i}>{part}</span>;
         }
       }.bind(this));
 
