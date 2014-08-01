@@ -42,8 +42,8 @@
 
     render: function() {
       React.renderComponent(
-        AppComponent( {value:"%B %d, %Y - %H:%M:%S",
-                      supportedCodes:this.getSupportedCodes()} ),
+        StrftimeBuilder( {value:"%B %d, %Y - %H:%M:%S",
+                         supportedCodes:this.getSupportedCodes()} ),
         document.getElementById('app')
       );
     }
@@ -118,7 +118,7 @@
     }
   });
 
-  var AppComponent = React.createClass({displayName: 'AppComponent',
+  var StrftimeBuilder = React.createClass({displayName: 'StrftimeBuilder',
     getInitialState: function() {
       return {
         format: this.props.value || '',
