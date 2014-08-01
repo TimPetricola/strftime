@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 (function(React) {
   var ContentEditable = require('./content-editable'),
       ColoredText     = require('./colored-text'),
