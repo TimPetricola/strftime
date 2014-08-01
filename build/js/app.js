@@ -185,7 +185,8 @@ module.exports= React.createClass({displayName: 'exports',
     },
 
     getRegex: function() {
-      return new RegExp('(' + this.props.supportedCodes.join('|') + ')');
+      this.regex = this.regex || new RegExp('(' + this.props.supportedCodes.join('|') + ')');
+      return this.regex;
     },
 
     render: function() {
