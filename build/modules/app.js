@@ -61,6 +61,20 @@
     }
   };
 
+  var ColoredText = React.createClass({displayName: 'ColoredText',
+    getColor: function() {
+      return Colors.get(this.props.for);
+    },
+
+    render: function() {
+      return (
+        React.DOM.span( {style:{backgroundColor: this.getColor()}}, 
+          this.props.children
+        )
+      );
+    }
+  });
+
   var FormatInput = React.createClass({displayName: 'FormatInput',
     getInitialState: function() {
       return {
@@ -76,9 +90,8 @@
     getWysisygContent: function() {
       return this.state.value.split(this.props.regex).map(function(part, i) {
         if(part.match(this.props.regex)) {
-          var color = Colors.get(part);
           return (
-            React.DOM.span( {style:{backgroundColor: color}, key:i}, 
+            ColoredText( {for:part, key:i}, 
               part
             )
           );
@@ -128,8 +141,9 @@
     render: function() {
       if(this.props.content.match(this.props.regex)) {
         return (
-          FormattedDate( {format:this.props.content,
-                         style:{backgroundColor: Colors.get(this.props.content)}} )
+          ColoredText( {for:this.props.content}, 
+            FormattedDate( {format:this.props.content} )
+          )
         );
       } else {
         return React.DOM.span(null, this.props.content);

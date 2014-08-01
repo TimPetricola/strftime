@@ -61,6 +61,20 @@
     }
   };
 
+  var ColoredText = React.createClass({
+    getColor: function() {
+      return Colors.get(this.props.for);
+    },
+
+    render: function() {
+      return (
+        <span style={{backgroundColor: this.getColor()}}>
+          {this.props.children}
+        </span>
+      );
+    }
+  });
+
   var FormatInput = React.createClass({
     getInitialState: function() {
       return {
@@ -76,11 +90,10 @@
     getWysisygContent: function() {
       return this.state.value.split(this.props.regex).map(function(part, i) {
         if(part.match(this.props.regex)) {
-          var color = Colors.get(part);
           return (
-            <span style={{backgroundColor: color}} key={i}>
+            <ColoredText for={part} key={i}>
               {part}
-            </span>
+            </ColoredText>
           );
         } else {
           return <span key={i}>{part}</span>;
@@ -128,8 +141,9 @@
     render: function() {
       if(this.props.content.match(this.props.regex)) {
         return (
-          <FormattedDate format={this.props.content}
-                         style={{backgroundColor: Colors.get(this.props.content)}} />
+          <ColoredText for={this.props.content}>
+            <FormattedDate format={this.props.content} />
+          </ColoredText>
         );
       } else {
         return <span>{this.props.content}</span>;
