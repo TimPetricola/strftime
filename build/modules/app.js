@@ -49,11 +49,11 @@
   };
 
   var Colors = {
-    colors: [],
+    colors: {},
 
-    get: function(index) {
-      this.colors[index] = this.colors[index] || this.getRandomColor();
-      return this.colors[index];
+    get: function(key) {
+      this.colors[key] = this.colors[key] || this.getRandomColor();
+      return this.colors[key];
     },
 
     getRandomColor: function() {
@@ -76,7 +76,7 @@
     getWysisygContent: function() {
       return this.state.value.split(this.props.regex).map(function(part, i) {
         if(part.match(this.props.regex)) {
-          var color = Colors.get(this.props.supportedCodes.indexOf(part));
+          var color = Colors.get(part);
           return (
             React.DOM.span( {style:{backgroundColor: color}, key:i}, 
               part
@@ -129,7 +129,7 @@
       if(this.props.content.match(this.props.regex)) {
         return (
           FormattedDate( {format:this.props.content,
-                         style:{backgroundColor: Colors.get(this.props.supportedCodes.indexOf(this.props.content))}} )
+                         style:{backgroundColor: Colors.get(this.props.content)}} )
         );
       } else {
         return React.DOM.span(null, this.props.content);
