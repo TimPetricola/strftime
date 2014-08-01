@@ -3,6 +3,22 @@
   var App = {
     init: function() {
       this.render();
+      this.initDateComponents();
+    },
+
+    initDateComponents: function() {
+      var formatAttribute = 'data-formatted-date';
+      var dates = document.querySelectorAll('[' + formatAttribute + ']');
+      var date = new Date();
+
+      for(var i = 0; i < dates.length; i++) {
+        var el = dates[i];
+        var format = el.getAttribute(formatAttribute);
+        React.renderComponent(
+          <FormattedDate format={format} date={date} />,
+          el
+        );
+      }
     },
 
     getSupportedCodes: function() {
