@@ -97,6 +97,7 @@ th {
 }
   .date-input__highlighter, .date-input__editor {
     padding: .8em;
+    line-height: 1.4;
   }
 
   .date-input__editor {
@@ -117,6 +118,7 @@ th {
   text-align: center;
   padding: .8em;
   font-size: 1.4em;
+  line-height: 1.4;
 }
 
 .reference {
