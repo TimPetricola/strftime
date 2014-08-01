@@ -1,0 +1,19 @@
+{
+  "name": "strftime-helper",
+  "version": "0.0.0",
+  "authors": [
+    "Tim Petricola <tim.petricola@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.10.0"
+  }
+}
