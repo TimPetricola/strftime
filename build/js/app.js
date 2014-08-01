@@ -1,6 +1,33 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /** @jsx React.DOM */
+// http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
+module.exports= React.createClass({displayName: 'exports',
+  shouldComponentUpdate: function(nextProps){
+    return nextProps.html !== this.getDOMNode().innerHTML;
+  },
+
+  emitChange: function(){
+    var html = this.getDOMNode().innerText;
+    if(this.props.onChange && html !== this.lastHtml) {
+      this.props.onChange(html);
+    }
+    this.lastHtml = html;
+  },
+
+  render: function(){
+    return this.transferPropsTo(
+      React.DOM.div( {contentEditable:true,
+           onInput:this.emitChange,
+           onBlur:this.emitChange}, this.props.children)
+    );
+  }
+});
+
+},{}],2:[function(require,module,exports){
+/** @jsx React.DOM */
 (function(React, RandomColor) {
+  var ContentEditable = require('./content-editable');
+
   var App = {
     init: function() {
       this.render();
@@ -59,29 +86,6 @@
       return RandomColor({luminosity: 'light'});
     }
   };
-
-  // http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
-  var ContentEditable = React.createClass({displayName: 'ContentEditable',
-    shouldComponentUpdate: function(nextProps){
-      return nextProps.html !== this.getDOMNode().innerHTML;
-    },
-
-    emitChange: function(){
-      var html = this.getDOMNode().innerText;
-      if(this.props.onChange && html !== this.lastHtml) {
-        this.props.onChange(html);
-      }
-      this.lastHtml = html;
-    },
-
-    render: function(){
-      return this.transferPropsTo(
-        React.DOM.div( {contentEditable:true,
-             onInput:this.emitChange,
-             onBlur:this.emitChange}, this.props.children)
-      );
-    }
-  });
 
   var FormatInput = React.createClass({displayName: 'FormatInput',
     getInitialState: function() {
@@ -218,4 +222,4 @@
 
 })(React, randomColor);
 
-},{}]},{},[1])
+},{"./content-editable":1}]},{},[2])
