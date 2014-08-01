@@ -1,17 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 /** @jsx React.DOM */
-var Colors = {
-  colors: {},
-
-  get: function(key) {
-    this.colors[key] = this.colors[key] || this.getRandomColor();
-    return this.colors[key];
-  },
-
-  getRandomColor: function() {
-    return randomColor({luminosity: 'light'});
-  }
-};
+var Colors = require('./colors-dict');
 
 module.exports = React.createClass({displayName: 'exports',
   getColor: function() {
@@ -27,7 +16,21 @@ module.exports = React.createClass({displayName: 'exports',
   }
 });
 
-},{}],2:[function(require,module,exports){
+},{"./colors-dict":2}],2:[function(require,module,exports){
+module.exports = {
+  colors: {},
+
+  get: function(key) {
+    this.colors[key] = this.colors[key] || this.getRandomColor();
+    return this.colors[key];
+  },
+
+  getRandomColor: function() {
+    return randomColor({luminosity: 'light'});
+  }
+};
+
+},{}],3:[function(require,module,exports){
 /** @jsx React.DOM */
 // http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
 module.exports= React.createClass({displayName: 'exports',
@@ -52,7 +55,7 @@ module.exports= React.createClass({displayName: 'exports',
   }
 });
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 /** @jsx React.DOM */
 (function(React) {
   var ContentEditable = require('./content-editable'),
@@ -208,7 +211,7 @@ module.exports= React.createClass({displayName: 'exports',
 
 })(React);
 
-},{"./colored-text":1,"./content-editable":2,"./formatted-date":4}],4:[function(require,module,exports){
+},{"./colored-text":1,"./content-editable":3,"./formatted-date":5}],5:[function(require,module,exports){
 /** @jsx React.DOM */
 module.exports = React.createClass({displayName: 'exports',
   getInitialState: function() {
@@ -234,4 +237,4 @@ module.exports = React.createClass({displayName: 'exports',
   }
 });
 
-},{}]},{},[3])
+},{}]},{},[4])
