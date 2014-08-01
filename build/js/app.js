@@ -223,6 +223,10 @@ module.exports= React.createClass({
 module.exports = React.createClass({
   displayName: 'FormattedDate',
 
+  propTypes: {
+    format: React.PropTypes.string.isRequired
+  },
+
   getInitialState: function() {
     return {
       date: new Date()

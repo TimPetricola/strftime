@@ -3,6 +3,10 @@ var Colors = require('./colors-dict');
 module.exports = React.createClass({
   displayName: 'ColoredText',
 
+  propTypes: {
+    for: React.PropTypes.oneOf(['string', 'number']).isRequired
+  }
+
   render: function() {
     var style = {backgroundColor: this.getColor()};
 
