@@ -79,6 +79,12 @@ code {
     padding: 0;
   }
 
+@media (max-width: 600px) {
+  .section {
+    padding: 0;
+  }
+}
+
 th {
   font-weight: bold;
 }
