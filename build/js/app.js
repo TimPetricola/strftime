@@ -142,26 +142,18 @@ module.exports= React.createClass({displayName: 'exports',
     }
   });
 
-  var FormattedPart = React.createClass({displayName: 'FormattedPart',
-    render: function() {
-      if(this.props.content.match(this.props.regex)) {
-        return (
-          ColoredText( {for:this.props.content}, 
-            FormattedDate( {format:this.props.content} )
-          )
-        );
-      } else {
-        return React.DOM.span(null, this.props.content);
-      }
-    }
-  });
-
   var FormattedString = React.createClass({displayName: 'FormattedString',
     render: function() {
       var parts = this.props.content.split(this.props.regex).map(function(part, i) {
-        return FormattedPart( {content:part,
-                              regex:this.props.regex,
-                              supportedCodes:this.props.supportedCodes} );
+        if(part.match(this.props.regex)) {
+          return (
+            ColoredText( {for:part}, 
+              FormattedDate( {format:part} )
+            )
+          );
+        } else {
+          return React.DOM.span(null, part);
+        }
       }.bind(this));
 
       return React.DOM.span(null, parts);

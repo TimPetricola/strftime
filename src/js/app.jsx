@@ -87,26 +87,18 @@
     }
   });
 
-  var FormattedPart = React.createClass({
-    render: function() {
-      if(this.props.content.match(this.props.regex)) {
-        return (
-          <ColoredText for={this.props.content}>
-            <FormattedDate format={this.props.content} />
-          </ColoredText>
-        );
-      } else {
-        return <span>{this.props.content}</span>;
-      }
-    }
-  });
-
   var FormattedString = React.createClass({
     render: function() {
       var parts = this.props.content.split(this.props.regex).map(function(part, i) {
-        return <FormattedPart content={part}
-                              regex={this.props.regex}
-                              supportedCodes={this.props.supportedCodes} />;
+        if(part.match(this.props.regex)) {
+          return (
+            <ColoredText for={part}>
+              <FormattedDate format={part} />
+            </ColoredText>
+          );
+        } else {
+          return <span>{part}</span>;
+        }
       }.bind(this));
 
       return <span>{parts}</span>;
