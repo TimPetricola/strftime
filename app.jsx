@@ -105,8 +105,20 @@
   });
 
   var FormattedDate = React.createClass({
+    getInitialState: function() {
+      return {
+        date: new Date()
+      };
+    },
+
+    componentDidMount: function() {
+      setInterval(function () {
+        this.setState({date: new Date()});
+      }.bind(this), 10);
+    },
+
     getFormattedDate: function() {
-      return strftime(this.props.format, this.props.date);
+      return strftime(this.props.format, this.state.date);
     },
 
     render: function() {
@@ -121,7 +133,6 @@
       if(this.props.content.match(this.props.regex)) {
         return (
           <FormattedDate format={this.props.content}
-                         date={this.props.date}
                          style={{backgroundColor: Colors.get(this.props.supportedCodes.indexOf(this.props.content))}} />
         );
       } else {
@@ -159,14 +170,7 @@
     getInitialState: function() {
       return {
         format: this.props.value || '',
-        date: new Date()
       };
-    },
-
-    componentDidMount: function() {
-      setInterval(function () {
-        this.setState({date: new Date()});
-      }.bind(this), 10);
     },
 
     handleFormatChange: function(format) {
@@ -185,7 +189,6 @@
                        regex={this.getRegex()}
                        supportedCodes={this.props.supportedCodes} />
           <Result format={this.state.format}
-                  date={this.state.date}
                   regex={this.getRegex()}
                   supportedCodes={this.props.supportedCodes} />
         </div>
@@ -193,6 +196,6 @@
     }
   });
 
-  App.render();
+  App.init();
 
 })(React, randomColor);
