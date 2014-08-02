@@ -43,7 +43,7 @@
       var format = Helpers.queryParameters.format;
       console.log( Helpers.queryParameters.format);
       if(format === undefined) {
-        format = "%B %d, %Y - %H:%M:%S"
+        format = "%B %d, %Y - %H:%M:%S";
       }
       return format;
     },
@@ -60,15 +60,14 @@
   var Helpers = {
     placeCaretAtEnd: function(el) {
       el.focus();
-      if (typeof window.getSelection != "undefined"
-              && typeof document.createRange != "undefined") {
+      if (typeof window.getSelection !== "undefined" && typeof document.createRange !== "undefined") {
           var range = document.createRange();
           range.selectNodeContents(el);
           range.collapse(false);
           var sel = window.getSelection();
           sel.removeAllRanges();
           sel.addRange(range);
-      } else if (typeof document.body.createTextRange != "undefined") {
+      } else if (typeof document.body.createTextRange !== "undefined") {
           var textRange = document.body.createTextRange();
           textRange.moveToElementText(el);
           textRange.collapse(false);
@@ -77,7 +76,7 @@
     },
 
     queryParameters: (function(a) {
-        if (a == "") return {};
+        if (a === "") return {};
         var b = {};
         for (var i = 0; i < a.length; ++i)
         {
@@ -87,7 +86,7 @@
         }
         return b;
     })(window.location.search.substr(1).split('&'))
-  }
+  };
 
   var FormatInput = React.createClass({
     getInitialState: function() {
