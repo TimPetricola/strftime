@@ -40,9 +40,8 @@
     },
 
     initialFormat: function() {
-      var format = Helpers.queryParameters.format;
-      console.log( Helpers.queryParameters.format);
-      if(format === undefined) {
+      var format = Helpers.getHash();
+      if(format === '') {
         format = "%B %d, %Y - %H:%M:%S";
       }
       return format;
@@ -75,17 +74,13 @@
       }
     },
 
-    queryParameters: (function(a) {
-        if (a === "") return {};
-        var b = {};
-        for (var i = 0; i < a.length; ++i)
-        {
-            var p=a[i].split('=');
-            if (p.length != 2) continue;
-            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
-        }
-        return b;
-    })(window.location.search.substr(1).split('&'))
+    getHash: function() {
+      return decodeURI(location.hash.substring(1));
+    },
+
+    setHash: function(value) {
+      location.hash = encodeURI(value);
+    }
   };
 
   var FormatInput = React.createClass({
@@ -170,6 +165,7 @@
 
     handleFormatChange: function(format) {
       this.setState({format: format});
+      Helpers.setHash(format);
     },
 
     getRegex: function() {
