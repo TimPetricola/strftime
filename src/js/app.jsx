@@ -39,9 +39,18 @@
       return this.supportedCodes;
     },
 
+    initialFormat: function() {
+      var format = Helpers.queryParameters.format;
+      console.log( Helpers.queryParameters.format);
+      if(format === undefined) {
+        format = "%B %d, %Y - %H:%M:%S"
+      }
+      return format;
+    },
+
     render: function() {
       React.renderComponent(
-        <StrftimeBuilder value='%B %d, %Y - %H:%M:%S'
+        <StrftimeBuilder value={this.initialFormat()}
                          supportedCodes={this.getSupportedCodes()} />,
         document.getElementById('app')
       );
@@ -65,7 +74,19 @@
           textRange.collapse(false);
           textRange.select();
       }
-    }
+    },
+
+    queryParameters: (function(a) {
+        if (a == "") return {};
+        var b = {};
+        for (var i = 0; i < a.length; ++i)
+        {
+            var p=a[i].split('=');
+            if (p.length != 2) continue;
+            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+        }
+        return b;
+    })(window.location.search.substr(1).split('&'))
   }
 
   var FormatInput = React.createClass({

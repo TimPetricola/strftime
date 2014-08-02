@@ -111,9 +111,18 @@ module.exports= React.createClass({
       return this.supportedCodes;
     },
 
+    initialFormat: function() {
+      var format = Helpers.queryParameters.format;
+      console.log( Helpers.queryParameters.format);
+      if(format === undefined) {
+        format = "%B %d, %Y - %H:%M:%S"
+      }
+      return format;
+    },
+
     render: function() {
       React.renderComponent(
-        StrftimeBuilder( {value:"%B %d, %Y - %H:%M:%S",
+        StrftimeBuilder( {value:this.initialFormat(),
                          supportedCodes:this.getSupportedCodes()} ),
         document.getElementById('app')
       );
@@ -123,21 +132,33 @@ module.exports= React.createClass({
   var Helpers = {
     placeCaretAtEnd: function(el) {
       el.focus();
-      if (typeof window.getSelection != "undefined"
-              && typeof document.createRange != "undefined") {
+      if (typeof window.getSelection !== "undefined"
+              && typeof document.createRange !== "undefined") {
           var range = document.createRange();
           range.selectNodeContents(el);
           range.collapse(false);
           var sel = window.getSelection();
           sel.removeAllRanges();
           sel.addRange(range);
-      } else if (typeof document.body.createTextRange != "undefined") {
+      } else if (typeof document.body.createTextRange !== "undefined") {
           var textRange = document.body.createTextRange();
           textRange.moveToElementText(el);
           textRange.collapse(false);
           textRange.select();
       }
-    }
+    },
+
+    queryParameters: (function(a) {
+        if (a == "") return {};
+        var b = {};
+        for (var i = 0; i < a.length; ++i)
+        {
+            var p=a[i].split('=');
+            if (p.length != 2) continue;
+            b[p[0]] = decodeURIComponent(p[1].replace(/\+/g, " "));
+        }
+        return b;
+    })(window.location.search.substr(1).split('&'))
   }
 
   var FormatInput = React.createClass({displayName: 'FormatInput',
