@@ -6,7 +6,7 @@ module.exports = React.createClass({
   displayName: 'ColoredText',
 
   propTypes: {
-    for: React.PropTypes.oneOf(['string', 'number']).isRequired
+    for: React.PropTypes.string.isRequired
   },
 
   render: function() {
