@@ -1,0 +1,15 @@
+{
+  "name": "strftime",
+  "homepage": "https://github.com/samsonjs/strftime",
+  "version": "0.8.1",
+  "_release": "0.8.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.8.1",
+    "commit": "df17fc85c9b52b9bb6790bfec940ea438ea3fdad"
+  },
+  "_source": "git://github.com/samsonjs/strftime.git",
+  "_target": "~0.8.1",
+  "_originalSource": "samsonjs/strftime",
+  "_direct": true
+}
