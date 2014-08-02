@@ -7,15 +7,15 @@
   // Support CommonJS
   } else if (typeof exports === 'object') {
     var randomColor = factory();
-
+    
     // Support NodeJS & Component, which allow module.exports to be a function
     if (typeof module === 'object' && module && module.exports) {
       exports = module.exports = randomColor;
     }
-
+    
     // Support CommonJS 1.1.1 spec
     exports.randomColor = randomColor;
-
+  
   // Support vanilla script loading
   } else {
     root.randomColor = factory();
@@ -35,18 +35,16 @@
     var H,S,B;
 
     // Check if we need to generate multiple colors
-    if (options.count != null) {
+    if (options.count) {
 
       var totalColors = options.count,
           colors = [];
 
-      options.count = null;
+      options.count = false;
 
       while (totalColors > colors.length) {
         colors.push(randomColor(options));
       }
-
-      options.count = totalColors;
 
       return colors;
     }
@@ -297,13 +295,13 @@
 
     defineColor(
       'green',
-      [63,178],
+      [63,158],
       [[30,100],[40,90],[50,85],[60,81],[70,74],[80,64],[90,50],[100,40]]
     );
 
     defineColor(
       'blue',
-      [179, 257],
+      [159, 257],
       [[20,100],[30,86],[40,80],[50,74],[60,60],[70,52],[80,44],[90,39],[100,35]]
     );
 
