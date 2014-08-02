@@ -11,6 +11,7 @@
     "gulp-browserify": "~0.5.0",
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.2.0",
+    "gulp-connect": "^2.0.6",
     "gulp-flatten": "0.0.2",
     "gulp-jshint": "^1.6.3",
     "gulp-notify": "^1.4.0",

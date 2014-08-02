@@ -10,7 +10,8 @@ var gulp          = require('gulp'),
     flatten       = require('gulp-flatten'),
     plumber       = require('gulp-plumber'),
     react         = require('gulp-react'),
-    concat        = require('gulp-concat');
+    concat        = require('gulp-concat'),
+    connect       = require('gulp-connect');;
 
 
 // Deletes everything in the build and dist directories
@@ -70,12 +71,15 @@ gulp.task('copy-css-src', ['lint'], function(){
     .pipe(gulp.dest('./build/css'));
 });
 
+gulp.task('webserver', function() {
+  connect.server();
+});
 
 gulp.task('watch', function() {
   gulp.watch(['./src/**/*.js', './src/**/*.jsx'], ['build-js'])
   gulp.watch(['./src/**/*.css'], ['copy-css-src'])
 });
 
-gulp.task('default', ['clean'], function() {
+gulp.task('default', ['clean', 'webserver'], function() {
   gulp.start('build-js', 'copy-css-src', 'watch')
 })
