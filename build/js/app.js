@@ -120,11 +120,35 @@ module.exports= React.createClass({
     }
   };
 
+  var Helpers = {
+    placeCaretAtEnd: function(el) {
+      el.focus();
+      if (typeof window.getSelection != "undefined"
+              && typeof document.createRange != "undefined") {
+          var range = document.createRange();
+          range.selectNodeContents(el);
+          range.collapse(false);
+          var sel = window.getSelection();
+          sel.removeAllRanges();
+          sel.addRange(range);
+      } else if (typeof document.body.createTextRange != "undefined") {
+          var textRange = document.body.createTextRange();
+          textRange.moveToElementText(el);
+          textRange.collapse(false);
+          textRange.select();
+      }
+    }
+  }
+
   var FormatInput = React.createClass({displayName: 'FormatInput',
     getInitialState: function() {
       return {
         value: this.props.initialValue || ''
       };
+    },
+
+    componentDidMount: function() {
+      Helpers.placeCaretAtEnd(this.refs.editor.getDOMNode());
     },
 
     handleChange: function(value) {
@@ -151,7 +175,7 @@ module.exports= React.createClass({
         React.DOM.div( {className:"date-input"}, 
           React.DOM.code(null, 
             React.DOM.div( {className:"date-input__highlighter"}, this.getColoredContent()),
-            ContentEditable( {className:"date-input__editor", onChange:this.handleChange}, this.state.value)
+            ContentEditable( {ref:"editor", className:"date-input__editor", onChange:this.handleChange}, this.state.value)
           )
         )
       );
