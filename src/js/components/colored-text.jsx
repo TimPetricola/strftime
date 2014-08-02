@@ -5,10 +5,12 @@ module.exports = React.createClass({
 
   propTypes: {
     for: React.PropTypes.oneOf(['string', 'number']).isRequired
-  }
+  },
 
   render: function() {
-    var style = {backgroundColor: this.getColor()};
+    var style = {
+      backgroundColor: this.getColor()
+    };
 
     return (
       <span style={style}>
