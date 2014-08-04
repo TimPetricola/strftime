@@ -56,7 +56,8 @@ body {
   width: 700px;
   max-width: 100%;
   margin: 0 auto;
-  background-color: #26272a;
+  background-color: #edf2f6;
+  color: #7b8690;
 }
 
 code {
@@ -65,46 +66,53 @@ code {
 
 .page-title {
   font-size: 1.4em;
-  color: #fff;
   text-align: center;
   margin: 1em 0;
+  color: #2e3b45;
 }
 
 .section {
   background-color: #fff;
-  padding: 2em;
   margin-bottom: 2em;
+  box-shadow: 0 .2em 0 #d6e1e9;
+  padding: 1em 0;
 }
-  .section--full {
-    padding: 0;
-  }
 
-@media (max-width: 600px) {
+@media (min-width: 601px) {
   .section {
-    padding: 0;
+    padding: 2em;
+    border-radius: .25em;
   }
+    .section--full {
+      padding: 0;
+    }
 }
 
 th {
   font-weight: bold;
+  color: #2e3b45;
 }
 
 .date-input {
   position: relative;
   text-align: center;
   font-size: 1.4em;
-  border-bottom: 2px solid #eee;
+  border-bottom: 2px solid #edf2f6;
 }
   .date-input__highlighter, .date-input__editor {
     padding: .8em;
     line-height: 1.4;
     display: inline-block;
+    width: 100%;
   }
 
   .date-input__editor {
     position: relative;
     outline: none;
   }
+    .date-input__editor:focus {
+      box-shadow: 0 0 .75em #62a8d0;
+    }
 
   .date-input__highlighter {
     position: absolute;
@@ -115,18 +123,23 @@ th {
     color: transparent;
   }
 
+.date-input__editor, .result {
+  color: #000;
+}
+
 .result {
   text-align: center;
   padding: .8em;
   font-size: 1.4em;
   line-height: 1.4;
+  background-color: #fafbfc;
 }
 
 .reference {
   font-size: .9em;
 }
   .reference tr:nth-child(even) {
-    background-color: #efefef;
+    background-color: #edf2f6;
   }
 
   .reference td, .reference th {
