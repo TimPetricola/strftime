@@ -98,6 +98,7 @@ th {
   .date-input__highlighter, .date-input__editor {
     padding: .8em;
     line-height: 1.4;
+    display: inline-block;
   }
 
   .date-input__editor {
