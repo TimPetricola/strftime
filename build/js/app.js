@@ -147,7 +147,16 @@ module.exports= React.createClass({
     },
 
     getHash: function() {
-      return decodeURI(location.hash.substring(1));
+      var decodedHash = null;
+      var hash        = location.hash.substring(1);
+
+      try {
+        decodedHash =  decodeURIComponent(hash);
+      } catch (e) {
+        decodedHash = hash;
+      }
+
+      return decodedHash;
     },
 
     setHash: function(value) {
