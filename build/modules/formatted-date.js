@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 module.exports = React.createClass({
   displayName: 'FormattedDate',
 
@@ -13,9 +12,7 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    return this.transferPropsTo(
-     React.DOM.span(null, this.getFormattedDate())
-    );
+    return React.createElement("span", React.__spread({},  this.props), this.getFormattedDate());
   },
 
   componentDidMount: function() {

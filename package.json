@@ -17,10 +17,10 @@
     "gulp-notify": "^1.4.0",
     "gulp-notify-growl": "^1.0.2",
     "gulp-plumber": "^0.6.3",
-    "gulp-react": "^0.4.0",
+    "gulp-react": "^3.0.1",
     "gulp-rename": "~1.2.0",
     "gulp-util": "^2.2.19",
     "jshint-stylish": "^0.2.0",
-    "reactify": "~0.13.1"
+    "reactify": "~1.1.1"
   }
 }

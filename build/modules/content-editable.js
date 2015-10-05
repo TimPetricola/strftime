@@ -1,13 +1,15 @@
-/** @jsx React.DOM */
 // http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
 module.exports= React.createClass({
   displayName: 'ContentEditable',
 
   render: function(){
-    return this.transferPropsTo(
-      React.DOM.div( {contentEditable:true,
-           onInput:this.emitChange,
-           onBlur:this.emitChange}, this.props.children)
+    return (
+      React.createElement("div", React.__spread({},  this.props, 
+           {contentEditable: true, 
+           onInput: this.emitChange, 
+           onBlur: this.emitChange, 
+           dangerouslySetInnerHTML: {__html: this.props.html}})
+      )
     );
   },
 

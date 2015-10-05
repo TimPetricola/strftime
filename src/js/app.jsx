@@ -16,7 +16,7 @@
       for(var i = 0; i < dates.length; i++) {
         var el = dates[i];
         var format = el.getAttribute(formatAttribute);
-        React.renderComponent(
+        React.render(
           <FormattedDate format={format} />,
           el
         );
@@ -48,7 +48,7 @@
     },
 
     render: function() {
-      React.renderComponent(
+      React.render(
         <StrftimeBuilder value={this.initialFormat()}
                          supportedCodes={this.getSupportedCodes()} />,
         document.getElementById('app')
@@ -127,7 +127,7 @@
         <div className='date-input'>
           <code>
             <div className='date-input__highlighter'>{this.getColoredContent()}</div>
-            <ContentEditable ref='editor' className='date-input__editor' onChange={this.handleChange}>{this.state.value}</ContentEditable>
+            <ContentEditable ref='editor' className='date-input__editor' onChange={this.handleChange} html={this.state.value}></ContentEditable>
           </code>
         </div>
       );

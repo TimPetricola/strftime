@@ -3,10 +3,13 @@ module.exports= React.createClass({
   displayName: 'ContentEditable',
 
   render: function(){
-    return this.transferPropsTo(
-      <div contentEditable
+    return (
+      <div {...this.props}
+           contentEditable
            onInput={this.emitChange}
-           onBlur={this.emitChange}>{this.props.children}</div>
+           onBlur={this.emitChange}
+           dangerouslySetInnerHTML={{__html: this.props.html}}>
+      </div>
     );
   },
 

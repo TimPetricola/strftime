@@ -12,9 +12,7 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    return this.transferPropsTo(
-     <span>{this.getFormattedDate()}</span>
-    );
+    return <span {...this.props}>{this.getFormattedDate()}</span>;
   },
 
   componentDidMount: function() {

@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 (function(React) {
   var ContentEditable = require('./content-editable'),
       ColoredText     = require('./colored-text'),
@@ -17,8 +16,8 @@
       for(var i = 0; i < dates.length; i++) {
         var el = dates[i];
         var format = el.getAttribute(formatAttribute);
-        React.renderComponent(
-          FormattedDate( {format:format} ),
+        React.render(
+          React.createElement(FormattedDate, {format: format}),
           el
         );
       }
@@ -49,9 +48,9 @@
     },
 
     render: function() {
-      React.renderComponent(
-        StrftimeBuilder( {value:this.initialFormat(),
-                         supportedCodes:this.getSupportedCodes()} ),
+      React.render(
+        React.createElement(StrftimeBuilder, {value: this.initialFormat(), 
+                         supportedCodes: this.getSupportedCodes()}),
         document.getElementById('app')
       );
     }
@@ -93,7 +92,7 @@
     }
   };
 
-  var FormatInput = React.createClass({displayName: 'FormatInput',
+  var FormatInput = React.createClass({displayName: "FormatInput",
     getInitialState: function() {
       return {
         value: this.props.initialValue || ''
@@ -113,60 +112,60 @@
       return this.state.value.split(this.props.regex).map(function(part, i) {
         if(part.match(this.props.regex)) {
           return (
-            ColoredText( {for:part, key:i}, 
+            React.createElement(ColoredText, {for: part, key: i}, 
               part
             )
           );
         } else {
-          return React.DOM.span( {key:i}, part);
+          return React.createElement("span", {key: i}, part);
         }
       }.bind(this));
     },
 
     render: function() {
       return (
-        React.DOM.div( {className:"date-input"}, 
-          React.DOM.code(null, 
-            React.DOM.div( {className:"date-input__highlighter"}, this.getColoredContent()),
-            ContentEditable( {ref:"editor", className:"date-input__editor", onChange:this.handleChange}, this.state.value)
+        React.createElement("div", {className: "date-input"}, 
+          React.createElement("code", null, 
+            React.createElement("div", {className: "date-input__highlighter"}, this.getColoredContent()), 
+            React.createElement(ContentEditable, {ref: "editor", className: "date-input__editor", onChange: this.handleChange, html: this.state.value})
           )
         )
       );
     }
   });
 
-  var FormattedString = React.createClass({displayName: 'FormattedString',
+  var FormattedString = React.createClass({displayName: "FormattedString",
     render: function() {
       var parts = this.props.content.split(this.props.regex).map(function(part, i) {
         if(part.match(this.props.regex)) {
           return (
-            ColoredText( {for:part, key:i}, 
-              FormattedDate( {format:part} )
+            React.createElement(ColoredText, {for: part, key: i}, 
+              React.createElement(FormattedDate, {format: part})
             )
           );
         } else {
-          return React.DOM.span( {key:i}, part);
+          return React.createElement("span", {key: i}, part);
         }
       }.bind(this));
 
-      return React.DOM.span(null, parts);
+      return React.createElement("span", null, parts);
     }
   });
 
 
-  var Result = React.createClass({displayName: 'Result',
+  var Result = React.createClass({displayName: "Result",
     render: function() {
       return (
-        React.DOM.div( {className:"result"}, 
-          FormattedString( {content:this.props.format,
-                           regex:this.props.regex,
-                           supportedCodes:this.props.supportedCodes} )
+        React.createElement("div", {className: "result"}, 
+          React.createElement(FormattedString, {content: this.props.format, 
+                           regex: this.props.regex, 
+                           supportedCodes: this.props.supportedCodes})
         )
       );
     }
   });
 
-  var StrftimeBuilder = React.createClass({displayName: 'StrftimeBuilder',
+  var StrftimeBuilder = React.createClass({displayName: "StrftimeBuilder",
     getInitialState: function() {
       return {
         format: this.props.value || '',
@@ -185,14 +184,14 @@
 
     render: function() {
       return (
-        React.DOM.div(null, 
-          FormatInput( {onChange:this.handleFormatChange,
-                       initialValue:this.props.value,
-                       regex:this.getRegex(),
-                       supportedCodes:this.props.supportedCodes} ),
-          Result( {format:this.state.format,
-                  regex:this.getRegex(),
-                  supportedCodes:this.props.supportedCodes} )
+        React.createElement("div", null, 
+          React.createElement(FormatInput, {onChange: this.handleFormatChange, 
+                       initialValue: this.props.value, 
+                       regex: this.getRegex(), 
+                       supportedCodes: this.props.supportedCodes}), 
+          React.createElement(Result, {format: this.state.format, 
+                  regex: this.getRegex(), 
+                  supportedCodes: this.props.supportedCodes})
         )
       );
     }

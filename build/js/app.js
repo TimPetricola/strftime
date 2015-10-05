@@ -1,5 +1,4 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-/** @jsx React.DOM */
 var Colors = require('./colors-dict');
 
 module.exports = React.createClass({
@@ -15,7 +14,7 @@ module.exports = React.createClass({
     };
 
     return (
-      React.DOM.span( {style:style}, 
+      React.createElement("span", {style: style}, 
         this.props.children
       )
     );
@@ -41,16 +40,18 @@ module.exports = {
 };
 
 },{}],3:[function(require,module,exports){
-/** @jsx React.DOM */
 // http://stackoverflow.com/questions/22677931/react-js-onchange-event-for-contenteditable
 module.exports= React.createClass({
   displayName: 'ContentEditable',
 
   render: function(){
-    return this.transferPropsTo(
-      React.DOM.div( {contentEditable:true,
-           onInput:this.emitChange,
-           onBlur:this.emitChange}, this.props.children)
+    return (
+      React.createElement("div", React.__spread({},  this.props, 
+           {contentEditable: true, 
+           onInput: this.emitChange, 
+           onBlur: this.emitChange, 
+           dangerouslySetInnerHTML: {__html: this.props.html}})
+      )
     );
   },
 
@@ -69,7 +70,6 @@ module.exports= React.createClass({
 });
 
 },{}],4:[function(require,module,exports){
-/** @jsx React.DOM */
 (function(React) {
   var ContentEditable = require('./content-editable'),
       ColoredText     = require('./colored-text'),
@@ -88,8 +88,8 @@ module.exports= React.createClass({
       for(var i = 0; i < dates.length; i++) {
         var el = dates[i];
         var format = el.getAttribute(formatAttribute);
-        React.renderComponent(
-          FormattedDate( {format:format} ),
+        React.render(
+          React.createElement(FormattedDate, {format: format}),
           el
         );
       }
@@ -120,9 +120,9 @@ module.exports= React.createClass({
     },
 
     render: function() {
-      React.renderComponent(
-        StrftimeBuilder( {value:this.initialFormat(),
-                         supportedCodes:this.getSupportedCodes()} ),
+      React.render(
+        React.createElement(StrftimeBuilder, {value: this.initialFormat(), 
+                         supportedCodes: this.getSupportedCodes()}),
         document.getElementById('app')
       );
     }
@@ -164,7 +164,7 @@ module.exports= React.createClass({
     }
   };
 
-  var FormatInput = React.createClass({displayName: 'FormatInput',
+  var FormatInput = React.createClass({displayName: "FormatInput",
     getInitialState: function() {
       return {
         value: this.props.initialValue || ''
@@ -184,60 +184,60 @@ module.exports= React.createClass({
       return this.state.value.split(this.props.regex).map(function(part, i) {
         if(part.match(this.props.regex)) {
           return (
-            ColoredText( {for:part, key:i}, 
+            React.createElement(ColoredText, {for: part, key: i}, 
               part
             )
           );
         } else {
-          return React.DOM.span( {key:i}, part);
+          return React.createElement("span", {key: i}, part);
         }
       }.bind(this));
     },
 
     render: function() {
       return (
-        React.DOM.div( {className:"date-input"}, 
-          React.DOM.code(null, 
-            React.DOM.div( {className:"date-input__highlighter"}, this.getColoredContent()),
-            ContentEditable( {ref:"editor", className:"date-input__editor", onChange:this.handleChange}, this.state.value)
+        React.createElement("div", {className: "date-input"}, 
+          React.createElement("code", null, 
+            React.createElement("div", {className: "date-input__highlighter"}, this.getColoredContent()), 
+            React.createElement(ContentEditable, {ref: "editor", className: "date-input__editor", onChange: this.handleChange, html: this.state.value})
           )
         )
       );
     }
   });
 
-  var FormattedString = React.createClass({displayName: 'FormattedString',
+  var FormattedString = React.createClass({displayName: "FormattedString",
     render: function() {
       var parts = this.props.content.split(this.props.regex).map(function(part, i) {
         if(part.match(this.props.regex)) {
           return (
-            ColoredText( {for:part, key:i}, 
-              FormattedDate( {format:part} )
+            React.createElement(ColoredText, {for: part, key: i}, 
+              React.createElement(FormattedDate, {format: part})
             )
           );
         } else {
-          return React.DOM.span( {key:i}, part);
+          return React.createElement("span", {key: i}, part);
         }
       }.bind(this));
 
-      return React.DOM.span(null, parts);
+      return React.createElement("span", null, parts);
     }
   });
 
 
-  var Result = React.createClass({displayName: 'Result',
+  var Result = React.createClass({displayName: "Result",
     render: function() {
       return (
-        React.DOM.div( {className:"result"}, 
-          FormattedString( {content:this.props.format,
-                           regex:this.props.regex,
-                           supportedCodes:this.props.supportedCodes} )
+        React.createElement("div", {className: "result"}, 
+          React.createElement(FormattedString, {content: this.props.format, 
+                           regex: this.props.regex, 
+                           supportedCodes: this.props.supportedCodes})
         )
       );
     }
   });
 
-  var StrftimeBuilder = React.createClass({displayName: 'StrftimeBuilder',
+  var StrftimeBuilder = React.createClass({displayName: "StrftimeBuilder",
     getInitialState: function() {
       return {
         format: this.props.value || '',
@@ -256,14 +256,14 @@ module.exports= React.createClass({
 
     render: function() {
       return (
-        React.DOM.div(null, 
-          FormatInput( {onChange:this.handleFormatChange,
-                       initialValue:this.props.value,
-                       regex:this.getRegex(),
-                       supportedCodes:this.props.supportedCodes} ),
-          Result( {format:this.state.format,
-                  regex:this.getRegex(),
-                  supportedCodes:this.props.supportedCodes} )
+        React.createElement("div", null, 
+          React.createElement(FormatInput, {onChange: this.handleFormatChange, 
+                       initialValue: this.props.value, 
+                       regex: this.getRegex(), 
+                       supportedCodes: this.props.supportedCodes}), 
+          React.createElement(Result, {format: this.state.format, 
+                  regex: this.getRegex(), 
+                  supportedCodes: this.props.supportedCodes})
         )
       );
     }
@@ -274,7 +274,6 @@ module.exports= React.createClass({
 })(React);
 
 },{"./colored-text":1,"./content-editable":3,"./formatted-date":5}],5:[function(require,module,exports){
-/** @jsx React.DOM */
 module.exports = React.createClass({
   displayName: 'FormattedDate',
 
@@ -289,9 +288,7 @@ module.exports = React.createClass({
   },
 
   render: function() {
-    return this.transferPropsTo(
-     React.DOM.span(null, this.getFormattedDate())
-    );
+    return React.createElement("span", React.__spread({},  this.props), this.getFormattedDate());
   },
 
   componentDidMount: function() {

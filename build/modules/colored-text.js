@@ -1,4 +1,3 @@
-/** @jsx React.DOM */
 var Colors = require('./colors-dict');
 
 module.exports = React.createClass({
@@ -14,7 +13,7 @@ module.exports = React.createClass({
     };
 
     return (
-      React.DOM.span( {style:style}, 
+      React.createElement("span", {style: style}, 
         this.props.children
       )
     );

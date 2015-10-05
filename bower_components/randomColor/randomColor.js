@@ -1,3 +1,6 @@
+// randomColor by David Merfield under the MIT license
+// https://github.com/davidmerfield/randomColor/
+
 ;(function(root, factory) {
 
   // Support AMD
@@ -23,6 +26,9 @@
 
 }(this, function() {
 
+  // Seed to get repeatable colors
+  var seed = null;
+
   // Shared color dictionary
   var colorDictionary = {};
 
@@ -31,21 +37,27 @@
 
   var randomColor = function(options) {
     options = options || {};
+    if (options.seed && !seed) seed = options.seed;
 
     var H,S,B;
 
     // Check if we need to generate multiple colors
-    if (options.count) {
+    if (options.count != null) {
 
       var totalColors = options.count,
           colors = [];
 
-      options.count = false;
+      options.count = null;
 
       while (totalColors > colors.length) {
         colors.push(randomColor(options));
       }
 
+      options.count = totalColors;
+
+      //Keep the seed constant between runs. 
+      if (options.seed) seed = options.seed;
+      
       return colors;
     }
 
@@ -142,14 +154,19 @@
       case 'hsvArray':
         return hsv;
 
-      case 'hsv':
-        return colorString('hsv', hsv);
+      case 'hslArray':
+        return HSVtoHSL(hsv);
+
+      case 'hsl':
+        var hsl = HSVtoHSL(hsv);
+        return 'hsl('+hsl[0]+', '+hsl[1]+'%, '+hsl[2]+'%)';
 
       case 'rgbArray':
         return HSVtoRGB(hsv);
 
       case 'rgb':
-        return colorString('rgb', HSVtoRGB(hsv));
+        var rgb = HSVtoRGB(hsv);
+        return 'rgb(' + rgb.join(', ') + ')';
 
       default:
         return HSVtoHex(hsv);
@@ -228,11 +245,16 @@
   }
 
   function randomWithin (range) {
-    return Math.floor(range[0] + Math.random()*(range[1] + 1 - range[0]));
-  }
-
-  function shiftHue (h, degrees) {
-    return (h + degrees)%360;
+    if (seed == null) {
+      return Math.floor(range[0] + Math.random()*(range[1] + 1 - range[0]));
+    } else {
+      //Seeded random algorithm from http://indiegamr.com/generate-repeatable-random-numbers-in-js/
+      var max = range[1] || 1;
+      var min = range[0] || 0;
+      seed = (seed * 9301 + 49297) % 233280;
+      var rnd = seed / 233280.0;
+      return Math.floor(min + rnd * (max - min));
+    }
   }
 
   function HSVtoHex (hsv){
@@ -295,13 +317,13 @@
 
     defineColor(
       'green',
-      [63,158],
+      [63,178],
       [[30,100],[40,90],[50,85],[60,81],[70,74],[80,64],[90,50],[100,40]]
     );
 
     defineColor(
       'blue',
-      [159, 257],
+      [179, 257],
       [[20,100],[30,86],[40,80],[50,74],[60,60],[70,52],[80,44],[90,39],[100,35]]
     );
 
@@ -353,8 +375,17 @@
     return result;
   }
 
-  function colorString (prefix, values) {
-    return prefix + '(' + values.join(', ') + ')';
+  function HSVtoHSL (hsv) {
+    var h = hsv[0],
+      s = hsv[1]/100,
+      v = hsv[2]/100,
+      k = (2-s)*v;
+
+    return [
+      h,
+      Math.round(s*v / (k<1 ? k : 2-k) * 10000) / 100,
+      k/2 * 100
+    ];
   }
 
   return randomColor;
