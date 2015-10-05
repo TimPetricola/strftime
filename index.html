@@ -29,16 +29,6 @@
             <td>Full weekday name</td>
             <td><code data-formatted-date='%A'>Monday</code></td>
           </tr>
-          <tr data-code='%w'>
-            <td><code>%w</code></td>
-            <td>The weekday, Sunday as the first day of the week (0-6)</td>
-            <td><code data-formatted-date='%w'>1</code></td>
-          </tr>
-          <tr data-code='%d'>
-            <td><code>%d</code></td>
-            <td>Day of the month, padded to 2 digits (01-31)</td>
-            <td><code data-formatted-date='%d'>28</code></td>
-          </tr>
           <tr data-code='%b'>
             <td><code>%b</code></td>
             <td>Abbreviated month name</td>
@@ -49,20 +39,35 @@
             <td>Full month name</td>
             <td><code data-formatted-date='%B'>July</code></td>
           </tr>
-          <tr data-code='%m'>
-            <td><code>%m</code></td>
-            <td>The month, padded to 2 digits (01-12)</td>
-            <td><code data-formatted-date='%m'>07</code></td>
+          <tr data-code='%C'>
+            <td><code>%C</code></td>
+            <td>Century number (year/100) as a 2-digit integer</td>
+            <td><code data-formatted-date='%C'>20</code></td>
           </tr>
-          <tr data-code='%y'>
-            <td><code>%y</code></td>
-            <td>The year without the century (00-99)</td>
-            <td><code data-formatted-date='%y'>14</code></td>
+          <tr data-code='%d'>
+            <td><code>%d</code></td>
+            <td>Day of the month, padded to 2 digits (01-31)</td>
+            <td><code data-formatted-date='%d'>28</code></td>
           </tr>
-          <tr data-code='%Y'>
-            <td><code>%Y</code></td>
-            <td>The year with the century</td>
-            <td><code data-formatted-date='%Y'>2014</code></td>
+          <tr data-code='%D'>
+            <td><code>%D</code></td>
+            <td>Equivalent to <code>%m/%d/%y</code> in en-US</td>
+            <td><code data-formatted-date='%D'>07/28/14</code></td>
+          </tr>
+          <tr data-code='%e'>
+            <td><code>%e</code></td>
+            <td>Day of the month, padded with a leading space for single digit values (1-31)</td>
+            <td><code data-formatted-date='%e'>28</code></td>
+          </tr>
+          <tr data-code='%F'>
+            <td><code>%F</code></td>
+            <td>Equivalent to <code>%Y-%m-%d</code> (the ISO 8601 date format)</td>
+            <td><code data-formatted-date='%F'>2014-07-28</code></td>
+          </tr>
+          <tr data-code='%h'>
+            <td><code>%h</code></td>
+            <td>Equivalent to <code>%b</code> (abbreviated month name)</td>
+            <td><code data-formatted-date='%h'>Jul</code></td>
           </tr>
           <tr data-code='%H'>
             <td><code>%H</code></td>
@@ -74,45 +79,110 @@
             <td>The hour (12-hour clock), padded to 2 digits (01-12)</td>
             <td><code data-formatted-date='%I'>06</code></td>
           </tr>
-          <tr data-code='%p'>
-            <td><code>%p</code></td>
-            <td>"AM" or "PM"</td>
-            <td><code data-formatted-date='%p'>PM</code></td>
+          <tr data-code='%j'>
+            <td><code>%j</code></td>
+            <td>Day of the year, padded to 3 digits (001-366)</td>
+            <td><code data-formatted-date='%j'>209</code></td>
+          </tr>
+          <tr data-code='%k'>
+            <td><code>%k</code></td>
+            <td>The hour (24-hour clock), padded with a leading space for single digit values (0-23)</td>
+            <td><code data-formatted-date='%k'>18</code></td>
+          </tr>
+          <tr data-code='%l'>
+            <td><code>%l</code></td>
+            <td>The hour (12-hour clock), padded with a leading space for single digit values (1-12)</td>
+            <td><code data-formatted-date='%l'>6</code></td>
+          </tr>
+          <tr data-code='%m'>
+            <td><code>%m</code></td>
+            <td>The month, padded to 2 digits (01-12)</td>
+            <td><code data-formatted-date='%m'>07</code></td>
           </tr>
           <tr data-code='%M'>
             <td><code>%M</code></td>
             <td>The minute, padded to 2 digits (00-59)</td>
             <td><code data-formatted-date='%M'>01</code></td>
           </tr>
+          <tr data-code='%p'>
+            <td><code>%p</code></td>
+            <td>"AM" or "PM"</td>
+            <td><code data-formatted-date='%p'>PM</code></td>
+          </tr>
+          <tr data-code='%P'>
+            <td><code>%P</code></td>
+            <td>"am" or "PM"</td>
+            <td><code data-formatted-date='%P'>pm</code></td>
+          </tr>
+          <tr data-code='%r'>
+            <td><code>%r</code></td>
+            <td>Equivalent to <code>%I:%M:%S %p</code> (time in a.m. or p.m. notation)</td>
+            <td><code data-formatted-date='%r'>18:01:36 PM</code></td>
+          </tr>
+          <tr data-code='%R'>
+            <td><code>%R</code></td>
+            <td>Equivalent to <code>%H:%M</code> (time in 24-hour notation)</td>
+            <td><code data-formatted-date='%R'>18:01</code></td>
+          </tr>
+          <tr data-code='%s'>
+            <td><code>%s</code></td>
+            <td>N umber of seconds since the Epoch (1970-01-01 00:00:00 +0000), UTC</td>
+            <td><code data-formatted-date='%s'>514440602407</code></td>
+          </tr>
           <tr data-code='%S'>
             <td><code>%S</code></td>
             <td>The second, padded to 2 digits (00-60)</td>
             <td><code data-formatted-date='%S'>36</code></td>
           </tr>
-          <tr data-code='%z'>
-            <td><code>%z</code></td>
-            <td>The time zone offset from UTC, with a leading plus sign for UTC and zones east of UTC and a minus sign for those west of UTC, hours and minutes follow each padded to 2 digits and with no delimiter between them</td>
-            <td><code data-formatted-date='%z'>-0400</code></td>
+          <tr data-code='%T'>
+            <td><code>%T</code></td>
+            <td>Equivalent to <code>%H:%M:%S</code>(time in 24-hour notation)</td>
+            <td><code data-formatted-date='%T'>18:01:36</code></td>
           </tr>
-          <tr data-code='%Z'>
-            <td><code>%Z</code></td>
-            <td>The time zone name, replaced with an empty string if it is not found</td>
-            <td><code data-formatted-date='%Z'>EDT</code></td>
-          </tr>
-          <tr data-code='%j'>
-            <td><code>%j</code></td>
-            <td>Day of the year, padded to 3 digits (001-366)</td>
-            <td><code data-formatted-date='%j'>209</code></td>
+          <tr data-code='%u'>
+            <td><code>%u</code></td>
+            <td>Weekday, Monday being 1 (1-7)</td>
+            <td><code data-formatted-date='%u'>0</code></td>
           </tr>
           <tr data-code='%U'>
             <td><code>%U</code></td>
             <td>Week number of the year, Sunday as the first day of the week, padded to 2 digits (00-53)</td>
             <td><code data-formatted-date='%U'>30</code></td>
           </tr>
+          <tr data-code='%w'>
+            <td><code>%w</code></td>
+            <td>Weekday, Sunday being 0 (0-6)</td>
+            <td><code data-formatted-date='%w'>1</code></td>
+          </tr>
           <tr data-code='%W'>
             <td><code>%W</code></td>
             <td>Week number of the year, Monday as the first day of the week, padded to 2 digits (00-53)</td>
             <td><code data-formatted-date='%W'>30</code></td>
+          </tr>
+          <tr data-code='%y'>
+            <td><code>%y</code></td>
+            <td>The year without the century (00-99)</td>
+            <td><code data-formatted-date='%y'>14</code></td>
+          </tr>
+          <tr data-code='%y'>
+            <td><code>%y</code></td>
+            <td>The year without the century (00-99)</td>
+            <td><code data-formatted-date='%y'>14</code></td>
+          </tr>
+          <tr data-code='%Y'>
+            <td><code>%Y</code></td>
+            <td>The year with the century</td>
+            <td><code data-formatted-date='%Y'>2014</code></td>
+          </tr>
+          <tr data-code='%z'>
+            <td><code>%z</code></td>
+            <td>The <code>+hhmm</code> or <code>-hhmm</code> numeric timezone (that is, the hour and minute offset from UTC)</td>
+            <td><code data-formatted-date='%z'>-0400</code></td>
+          </tr>
+          <tr data-code='%Z'>
+            <td><code>%Z</code></td>
+            <td>The time zone name, replaced with an empty string if it is not found</td>
+            <td><code data-formatted-date='%Z'>EDT</code></td>
           </tr>
           <tr data-code='%%'>
             <td><code>%%</code></td>
