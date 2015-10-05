@@ -1,16 +1,15 @@
-import React from 'react';
-import Colors from './colors-dict';
+import React, { Component, PropTypes } from 'react';
 
-export default React.createClass({
-  displayName: 'ColoredText',
+import { color } from './utils';
 
-  propTypes: {
-    for: React.PropTypes.string.isRequired
-  },
+export default class ColoredText extends Component {
+  static propTypes = {
+    colorKey: PropTypes.string.isRequired
+  }
 
-  render: function() {
-    var style = {
-      backgroundColor: this.getColor()
+  render() {
+    const style = {
+      backgroundColor: color(this.props.colorKey)
     };
 
     return (
@@ -18,9 +17,5 @@ export default React.createClass({
         {this.props.children}
       </span>
     );
-  },
-
-  getColor: function() {
-    return Colors.get(this.props.for);
   }
-});
+};

@@ -1,34 +1,30 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import strftime from 'strftime';
 
-export default React.createClass({
-  displayName: 'FormattedDate',
-
-  propTypes: {
+export default class FormattedDate extends Component {
+  static propTypes = {
     format: React.PropTypes.string.isRequired
-  },
+  }
 
-  getInitialState: function() {
-    return {
-      date: new Date()
-    };
-  },
+  state = {
+    date: new Date()
+  }
 
-  render: function() {
+  render() {
     return <span {...this.props}>{this.getFormattedDate()}</span>;
-  },
+  }
 
-  componentDidMount: function() {
-    this.timeInterval = setInterval(function () {
-      this.setState({date: new Date()});
-    }.bind(this), 10);
-  },
+  componentDidMount() {
+    this.timeInterval = setInterval(() => {
+      this.setState({ date: new Date() });
+    }, 10);
+  }
 
-  componentWillUnmount: function() {
+  componentWillUnmount() {
     clearInterval(this.timeInterval);
-  },
+  }
 
-  getFormattedDate: function() {
+  getFormattedDate() {
     return strftime(this.props.format, this.state.date);
   }
-});
+};
