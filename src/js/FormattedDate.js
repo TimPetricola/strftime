@@ -1,4 +1,7 @@
-module.exports = React.createClass({
+import React from 'react';
+import strftime from 'strftime';
+
+export default React.createClass({
   displayName: 'FormattedDate',
 
   propTypes: {

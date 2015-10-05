@@ -1,6 +1,7 @@
-var Colors = require('./colors-dict');
+import React from 'react';
+import Colors from './colors-dict';
 
-module.exports = React.createClass({
+export default React.createClass({
   displayName: 'ColoredText',
 
   propTypes: {

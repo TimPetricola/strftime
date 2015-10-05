@@ -1,4 +1,6 @@
-module.exports = {
+import randomColor from 'randomcolor';
+
+export default {
   colors: {},
 
   get: function(key) {
@@ -7,6 +9,6 @@ module.exports = {
   },
 
   getRandomColor: function() {
-    return randomColor({luminosity: 'light'});
+    return randomColor({ luminosity: 'light' });
   }
 };
