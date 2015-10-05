@@ -25,6 +25,12 @@ export default class FormattedDate extends Component {
   }
 
   getFormattedDate() {
-    return strftime(this.props.format, this.state.date);
+    const formatted = strftime(this.props.format, this.state.date);
+
+    if (formatted === '\n') {
+      return <br />
+    } else {
+      return strftime(this.props.format, this.state.date);
+    }
   }
 };
