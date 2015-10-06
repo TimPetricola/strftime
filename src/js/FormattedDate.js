@@ -16,6 +16,7 @@ export default class FormattedDate extends Component {
   }
 
   componentDidMount() {
+    this.setState({ date: new Date() });
     this.timeInterval = setInterval(() => {
       this.setState({ date: new Date() });
     }, 1000);
