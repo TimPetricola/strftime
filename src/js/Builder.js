@@ -1,14 +1,22 @@
-import React, { Component, findDOMNode } from 'react';
+import React, { Component, PropTypes, findDOMNode } from 'react';
 
-import { placeCaretAtEnd, setHash } from './utils';
+import { placeCaretAtEnd } from './utils';
 
 import ContentEditable from './ContentEditable';
 import ColoredText from './ColoredText';
 import FormattedDate from './FormattedDate';
 
 class FormatInput extends Component {
+  static propTypes = {
+    initialValue: PropTypes.string
+  }
+
+  static defaultProps = {
+    initialValue: ''
+  }
+
   state = {
-    value: this.props.initialValue || ''
+    value: this.props.initialValue
   }
 
   componentDidMount() {
@@ -21,8 +29,10 @@ class FormatInput extends Component {
   }
 
   getColoredContent() {
-    return this.state.value.split(this.props.regex).map((part, i) => {
-      if(part.match(this.props.regex)) {
+    const { regex } = this.props;
+
+    return this.state.value.split(regex).map((part, i) => {
+      if(part.match(regex)) {
         return (
           <ColoredText colorKey={part} key={i}>
             {part}
@@ -52,12 +62,19 @@ class FormatInput extends Component {
 };
 
 class FormattedString extends Component {
+  static propTypes = {
+    date: PropTypes.instanceOf(Date).isRequired,
+    regex: PropTypes.instanceOf(RegExp).isRequired
+  }
+
   render() {
-    const parts = this.props.content.split(this.props.regex).map((part, i) => {
-      if(part.match(this.props.regex)) {
+    const { content, regex, date } = this.props;
+
+    const parts = content.split(regex).map((part, i) => {
+      if (part.match(regex)) {
         return (
           <ColoredText colorKey={part} key={i}>
-            <FormattedDate format={part} />
+            <FormattedDate format={part} date={date} />
           </ColoredText>
         );
       } else {
@@ -69,50 +86,42 @@ class FormattedString extends Component {
   }
 };
 
-
-class Result extends Component{
-  render() {
-    return (
-      <div className='result'>
-        <FormattedString
-          content={this.props.format}
-          regex={this.props.regex}
-          supportedCodes={this.props.supportedCodes}
-        />
-      </div>
-    );
+export default class Builder extends Component {
+  static propTypes = {
+    format: PropTypes.string
   }
-};
 
-export default class StrftimeBuilder extends Component {
+  static defaultProps = {
+    format: ''
+  }
+
   state = {
-    format: this.props.value || ''
+    format: this.props.value
   }
 
   handleFormatChange(format) {
     this.setState({ format: format });
-    setHash(format);
-  }
-
-  getRegex() {
-    this.regex = this.regex || new RegExp(`(${this.props.supportedCodes.join('|')})`);
-    return this.regex;
   }
 
   render() {
+    const codesRegex = new RegExp(`(${this.props.supportedCodes.join('|')})`);
+
     return (
       <div>
         <FormatInput
           onChange={this.handleFormatChange.bind(this)}
           initialValue={this.props.value}
-          regex={this.getRegex()}
+          regex={codesRegex}
           supportedCodes={this.props.supportedCodes}
         />
-        <Result
-          format={this.state.format}
-          regex={this.getRegex()}
-          supportedCodes={this.props.supportedCodes}
-        />
+        <div className='result'>
+          <FormattedString
+            date={this.props.date}
+            content={this.state.format}
+            regex={codesRegex}
+            supportedCodes={this.props.supportedCodes}
+          />
+        </div>
       </div>
     );
   }

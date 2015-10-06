@@ -22,8 +22,12 @@ export default class ReferenceTable extends Component {
     return (
       <tr data-code={usedCode} key={usedCode}>
         <td><code>{usedCode}</code></td>
-        <td>{label}</td>
-        <td><code><FormattedDate format={usedCode} /></code></td>
+        <td dangerouslySetInnerHTML={{__html: label}}></td>
+        <td>
+          <code>
+            <FormattedDate format={usedCode} date={this.props.date} />
+          </code>
+        </td>
       </tr>
     );
   }

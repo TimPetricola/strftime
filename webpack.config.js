@@ -1,20 +1,28 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
+var webpack = require('webpack');
 
-var isProd = process.env.NODE_ENV === 'production';
+var isProduction = process.env.NODE_ENV === 'production';
+
+var props = {
+  isProduction: isProduction,
+  date: new Date(),
+  format: '%B %d, %Y - %H:%M:%S'
+};
 
 module.exports = {
-  entry: './src/js/index.js',
+  entry: './index.js',
   output: {
-    path: __dirname + '/build/',
-    publicPath: '/build/',
-    filename: 'bundle.js'
+    path: __dirname,
+    filename: 'bundle.js',
+    libraryTarget: 'umd'
   },
   module: {
     loaders: [
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loaders: isProd ? ['babel?stage=0'] : ['react-hot', 'babel?stage=0']
+        loaders: isProduction ? ['babel?stage=0'] : ['react-hot', 'babel?stage=0']
       },
       {
         test: /\.css$/,
@@ -23,6 +31,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('style.css')
+    new ExtractTextPlugin('style.css'),
+    new webpack.NoErrorsPlugin(),
+    new StaticSiteGeneratorPlugin('bundle.js', '', props)
   ]
 };
+

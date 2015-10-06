@@ -2,8 +2,8 @@ import randomColor from 'randomcolor';
 
 let colors = {};
 
-export function color(key) {
-  colors[key] = colors[key] || randomColor({ luminosity: 'light' });
+export function color(key, seed = 1) {
+  colors[key] = colors[key] || randomColor({ luminosity: 'light', seed: seed });
   return colors[key];
 }
 
@@ -22,18 +22,4 @@ export function placeCaretAtEnd(node) {
     textRange.collapse(false);
     textRange.select();
   }
-}
-
-export function getHash() {
-  const hash = window.location.hash.substring(1);
-
-  try {
-    return decodeURIComponent(hash);
-  } catch (e) {
-    return hash;
-  }
-}
-
-export function setHash(value) {
-  window.location.hash = encodeURI(value);
 }

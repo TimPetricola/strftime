@@ -1,6 +1,14 @@
 import React, { Component, PropTypes, findDOMNode } from 'react';
 
 export default class ContentEditable extends Component {
+  static propTypes = {
+    html: PropTypes.string
+  }
+
+  static defaultProps = {
+    html: ''
+  }
+
   render() {
     return (
       <div
