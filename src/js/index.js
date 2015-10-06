@@ -4,40 +4,23 @@ import { getHash } from './utils';
 
 import FormattedDate from './FormattedDate';
 import Builder from './Builder';
+import ReferenceTable from './ReferenceTable';
 
 import '../css/style.css';
+
+import referenceEntries from 'json!../reference.json';
 
 var App = {
   init() {
     this.render();
-    this.initDateComponents();
+    this.initReferenceTable();
   },
 
-  initDateComponents() {
-    const formatAttribute = 'data-formatted-date';
-
-    Array.prototype.forEach.call(
-      document.querySelectorAll(`[${formatAttribute}]`),
-      (ele) => (
-        React.render(
-          <FormattedDate format={ele.getAttribute(formatAttribute)} />,
-          ele
-        )
-      )
+  initReferenceTable() {
+    React.render(
+      <ReferenceTable entries={referenceEntries} />,
+      document.getElementById('reference-table')
     );
-  },
-
-  getSupportedCodes() {
-    if(!this.supportedCodes) {
-      const codeAttribute = 'data-code';
-
-      this.supportedCodes = Array.prototype.map.call(
-        document.querySelectorAll(`[${codeAttribute}]`),
-        (ele) => ele.getAttribute(codeAttribute)
-      );
-    }
-
-    return this.supportedCodes;
   },
 
   initialFormat() {
@@ -49,10 +32,12 @@ var App = {
   },
 
   render() {
+    const supportedCodes = referenceEntries.map(entry => `%${entry.code}`);
+
     React.render(
       <Builder
         value={this.initialFormat()}
-        supportedCodes={this.getSupportedCodes()}
+        supportedCodes={supportedCodes}
       />,
       document.getElementById('app')
     );
