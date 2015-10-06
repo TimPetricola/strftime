@@ -124,10 +124,6 @@
     "label": "The year without the century (00-99)"
   },
   {
-    "code": "y",
-    "label": "The year without the century (00-99)"
-  },
-  {
     "code": "Y",
     "label": "The year with the century"
   },
