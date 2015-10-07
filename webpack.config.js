@@ -4,6 +4,7 @@ var webpack = require('webpack');
 
 var postcssImport = require('postcss-import');
 var autoprefixer = require('autoprefixer');
+var postcssCustomProperties = require('postcss-custom-properties');
 
 var isProduction = process.env.NODE_ENV === 'production';
 
@@ -40,12 +41,13 @@ module.exports = {
   ],
   postcss: function() {
     return [
-      autoprefixer,
       postcssImport({
         onImport: function (files) {
             files.forEach(this.addDependency);
         }.bind(this)
-      })
+      }),
+      autoprefixer,
+      postcssCustomProperties
     ];
   }
 };

@@ -24,9 +24,7 @@ export default class ReferenceTable extends Component {
         <td><code>{usedCode}</code></td>
         <td dangerouslySetInnerHTML={{__html: label}}></td>
         <td>
-          <code>
-            <FormattedDate format={usedCode} date={this.props.date} />
-          </code>
+          <FormattedDate format={usedCode} date={this.props.date} />
         </td>
       </tr>
     );
@@ -36,7 +34,7 @@ export default class ReferenceTable extends Component {
     const { entries } = this.props;
 
     return (
-      <table className='reference'>
+      <table className='reference-table'>
         <thead>
           <tr>
             <th>Code</th>

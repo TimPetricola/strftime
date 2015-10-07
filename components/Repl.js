@@ -86,7 +86,7 @@ class FormattedString extends Component {
   }
 };
 
-export default class Builder extends Component {
+export default class Repl extends Component {
   static propTypes = {
     format: PropTypes.string
   }
@@ -107,7 +107,7 @@ export default class Builder extends Component {
     const codesRegex = new RegExp(`(${this.props.supportedCodes.join('|')})`);
 
     return (
-      <div>
+      <div className='repl'>
         <FormatInput
           onChange={this.handleFormatChange.bind(this)}
           initialValue={this.props.value}

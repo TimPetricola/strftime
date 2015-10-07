@@ -1,0 +1,61 @@
+.repl-container {
+  position: fixed;
+  z-index: 2;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--primary-color);
+}
+
+.repl {
+  width: 960px;
+  max-width: 100%;
+  margin: 12px auto;
+  background-color: #fff;
+}
+
+
+.date-input {
+  position: relative;
+  text-align: center;
+  font-size: 1.4em;
+  border-bottom: 2px solid #edf2f6;
+}
+  .date-input__highlighter,
+  .date-input__editor {
+    padding: .8em;
+    line-height: 1.4;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .date-input__editor {
+    position: relative;
+    outline: none;
+  }
+    .date-input__editor:focus {
+      box-shadow: 0 0 .75em #62a8d0;
+    }
+
+  .date-input__highlighter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    color: transparent;
+  }
+
+.date-input__editor,
+.result {
+  color: #000;
+}
+
+.result {
+  text-align: center;
+  padding: .8em;
+  font-size: 1.4em;
+  line-height: 1.4;
+  background-color: #fafafa;
+
+}

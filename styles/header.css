@@ -1,0 +1,34 @@
+body:before {
+  content: '';
+  display: block;
+  background-color: var(--primary-color);
+  width: 100%;
+  height: 108px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.page-head {
+  color: #fff;
+  position: relative;
+  z-index: 1;
+  background-color: var(--primary-color);
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: 300;
+  margin: 24px 0;
+  display: inline-block;
+}
+
+.credits {
+  display: inline-block;
+  color: rgba(255, 255, 255, .3);
+}
+
+.credits a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, .7);
+}

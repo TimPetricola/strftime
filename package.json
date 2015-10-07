@@ -1,5 +1,5 @@
 {
-  "name": "strftime-helper",
+  "name": "strftime-reference",
   "description": "",
   "author": "Tim Petricola <tim.petricola@gmail.com>",
   "version": "0.0.0",
@@ -15,6 +15,7 @@
     "css-loader": "^0.19.0",
     "extract-text-webpack-plugin": "^0.8.2",
     "json-loader": "^0.5.3",
+    "postcss-custom-properties": "^5.0.0",
     "postcss-import": "^7.0.0",
     "postcss-loader": "^0.6.0",
     "randomcolor": "^0.4.0",
