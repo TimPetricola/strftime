@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import { color } from './utils';
+import { color } from '../utils';
 
 import FormattedDate from './FormattedDate';
 import referenceEntries from 'json!../reference.json';

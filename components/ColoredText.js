@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
-import { color } from './utils';
+import { color } from '../utils';
 
 export default class ColoredText extends Component {
   static propTypes = {

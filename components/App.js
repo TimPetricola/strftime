@@ -4,7 +4,7 @@ import FormattedDate from './FormattedDate';
 import Builder from './Builder';
 import ReferenceTable from './ReferenceTable';
 
-import '../css/style.css';
+import '../styles/index.css';
 
 import referenceEntries from 'json!../reference.json';
 
@@ -39,7 +39,7 @@ export default class App extends Component {
           <meta charSet='utf-8' />
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <title>Strftime Helper</title>
-          <link type='text/css' rel='stylesheet' href='/style.css' />
+          <link type='text/css' rel='stylesheet' href='/index.css' />
           {
             this.props.isProduction ? null :
               <script src="http://localhost:8080/webpack-dev-server.js"></script>

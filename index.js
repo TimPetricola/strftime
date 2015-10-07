@@ -1,5 +1,5 @@
 import React from 'react';
-import App from './src/js/app';
+import App from './components/app';
 
 if (typeof document !== 'undefined') {
   const props = JSON.parse(document.getElementById('props').innerHTML)

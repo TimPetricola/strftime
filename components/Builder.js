@@ -1,6 +1,6 @@
 import React, { Component, PropTypes, findDOMNode } from 'react';
 
-import { placeCaretAtEnd } from './utils';
+import { placeCaretAtEnd } from '../utils';
 
 import ContentEditable from './ContentEditable';
 import ColoredText from './ColoredText';
