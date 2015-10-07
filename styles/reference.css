@@ -9,6 +9,12 @@
   margin-bottom: 24px;
 }
 
+.reference-table-empty {
+  padding: 24px;
+  text-align: center;
+  color: rgba(0, 0, 0, .38);
+}
+
 .reference-table thead {
   padding-bottom: 3px;
 }

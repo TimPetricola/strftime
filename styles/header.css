@@ -32,3 +32,42 @@ body:before {
   text-decoration: none;
   color: rgba(255, 255, 255, .7);
 }
+
+.search-field {
+  position: absolute;
+  top: 12px;
+  right: 0;
+  display: block;
+  width: 200px;
+}
+
+.search-icon {
+  position: absolute;
+  top: 12px;
+  right: 0;
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url('/icons/search.svg');
+}
+
+.search-input {
+  line-height: 24px;
+  padding: 12px 32px 4px 0;
+  background-color: transparent;
+  font-family: var(--font);
+  font-weight: 300;
+  color: #fff;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, .3);
+  font-size: 16px;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, .7);
+}
+
+.search-input:focus {
+  border-color: rgba(255, 255, 255, 7);
+  outline: 0;
+}

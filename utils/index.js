@@ -23,3 +23,18 @@ export function placeCaretAtEnd(node) {
     textRange.select();
   }
 }
+
+export function searchReference(q, entries) {
+  q = q.toLowerCase().trim();
+
+  if (!q.length || q === '%') {
+    return entries;
+  }
+
+  return entries.filter((entry) => (
+    // Code matches
+    entry.code.toLowerCase() === q.replace('%', '') ||
+    // Label matches
+    q.length >= 3 && entry.label.toLowerCase().indexOf(q) > -1
+  ));
+}
