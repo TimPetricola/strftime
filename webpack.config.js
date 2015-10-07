@@ -2,6 +2,9 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var StaticSiteGeneratorPlugin = require('static-site-generator-webpack-plugin');
 var webpack = require('webpack');
 
+var postcssImport = require('postcss-import');
+var autoprefixer = require('autoprefixer');
+
 var isProduction = process.env.NODE_ENV === 'production';
 
 var props = {
@@ -26,14 +29,24 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', 'css')
+        loader: ExtractTextPlugin.extract('style', 'css!postcss')
       }
     ]
   },
   plugins: [
-    new ExtractTextPlugin('style.css'),
+    new ExtractTextPlugin('bundle.css'),
     new webpack.NoErrorsPlugin(),
     new StaticSiteGeneratorPlugin('bundle.js', '', props)
-  ]
+  ],
+  postcss: function() {
+    return [
+      autoprefixer,
+      postcssImport({
+        onImport: function (files) {
+            files.forEach(this.addDependency);
+        }.bind(this)
+      })
+    ];
+  }
 };
 
