@@ -88,11 +88,15 @@ class FormattedString extends Component {
 
 export default class Repl extends Component {
   static propTypes = {
-    format: PropTypes.string
+    format: PropTypes.string,
+    formats: PropTypes.array,
+    flags: PropTypes.array
   }
 
   static defaultProps = {
-    format: ''
+    format: '',
+    formats: [],
+    flags: []
   }
 
   state = {
@@ -104,21 +108,25 @@ export default class Repl extends Component {
   }
 
   render() {
-    const codesRegex = new RegExp(`(${this.props.supportedCodes.join('|')})`);
+    const { formats, flags } = this.props;
+
+    const regex = new RegExp(
+      `(%(?:${flags.join('|')})?(?:${formats.join('|')}))`
+    );
 
     return (
       <div className='repl'>
         <FormatInput
           onChange={this.handleFormatChange.bind(this)}
           initialValue={this.props.value}
-          regex={codesRegex}
+          regex={regex}
           supportedCodes={this.props.supportedCodes}
         />
         <div className='result'>
           <FormattedString
             date={this.props.date}
             content={this.state.format}
-            regex={codesRegex}
+            regex={regex}
             supportedCodes={this.props.supportedCodes}
           />
         </div>

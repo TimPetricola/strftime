@@ -1,142 +1,158 @@
-[
-  {
-    "code": "a",
-    "label": "Abbreviated weekday name"
-  },
-  {
-    "code": "A",
-    "label": "Full weekday name"
-  },
-  {
-    "code": "b",
-    "label": "Abbreviated month name"
-  },
-  {
-    "code": "B",
-    "label": "Full month name"
-  },
-  {
-    "code": "C",
-    "label": "Century number (year/100) as a 2-digit integer"
-  },
-  {
-    "code": "d",
-    "label": "Day of the month, padded to 2 digits (01-31)"
-  },
-  {
-    "code": "D",
-    "label": "Equivalent to <code>%m/%d/%y</code> in en-US"
-  },
-  {
-    "code": "e",
-    "label": "Day of the month, padded with a leading space for single digit values (1-31)"
-  },
-  {
-    "code": "F",
-    "label": "Equivalent to <code>%Y-%m-%d</code> (the ISO 8601 date format)"
-  },
-  {
-    "code": "h",
-    "label": "Equivalent to <code>%b</code> (abbreviated month name)"
-  },
-  {
-    "code": "H",
-    "label": "The hour (24-hour clock), padded to 2 digits (00-23)"
-  },
-  {
-    "code": "I",
-    "label": "The hour (12-hour clock), padded to 2 digits (01-12)"
-  },
-  {
-    "code": "j",
-    "label": "Day of the year, padded to 3 digits (001-366)"
-  },
-  {
-    "code": "k",
-    "label": "The hour (24-hour clock), padded with a leading space for single digit values (0-23)"
-  },
-  {
-    "code": "l",
-    "label": "The hour (12-hour clock), padded with a leading space for single digit values (1-12)"
-  },
-  {
-    "code": "m",
-    "label": "The month, padded to 2 digits (01-12)"
-  },
-  {
-    "code": "n",
-    "label": "Newline character"
-  },
-  {
-    "code": "M",
-    "label": "The minute, padded to 2 digits (00-59)"
-  },
-  {
-    "code": "p",
-    "label": "\"AM\" or \"PM\""
-  },
-  {
-    "code": "P",
-    "label": "\"am\" or \"PM\""
-  },
-  {
-    "code": "r",
-    "label": "Equivalent to <code>%I:%M:%S %p</code> (time in a.m. or p.m. notation)"
-  },
-  {
-    "code": "R",
-    "label": "Equivalent to <code>%H:%M</code> (time in 24-hour notation)"
-  },
-  {
-    "code": "s",
-    "label": "N umber of seconds since the Epoch (1970-01-01 00:00:00 +0000), UTC"
-  },
-  {
-    "code": "S",
-    "label": "The second, padded to 2 digits (00-60)"
-  },
-  {
-    "code": "t",
-    "label": "Tab character"
-  },
-  {
-    "code": "T",
-    "label": "Equivalent to <code>%H:%M:%S</code> (time in 24-hour notation)"
-  },
-  {
-    "code": "u",
-    "label": "Weekday, Monday being 1 (1-7)"
-  },
-  {
-    "code": "U",
-    "label": "Week number of the year, Sunday as the first day of the week, padded to 2 digits (00-53)"
-  },
-  {
-    "code": "w",
-    "label": "Weekday, Sunday being 0 (0-6)"
-  },
-  {
-    "code": "W",
-    "label": "Week number of the year, Monday as the first day of the week, padded to 2 digits (00-53)"
-  },
-  {
-    "code": "y",
-    "label": "The year without the century (00-99)"
-  },
-  {
-    "code": "Y",
-    "label": "The year with the century"
-  },
-  {
-    "code": "z",
-    "label": "The <code>+hhmm</code> or <code>-hhmm</code> numeric timezone (that is, the hour and minute offset from UTC)"
-  },
-  {
-    "code": "Z",
-    "label": "The time zone name, replaced with an empty string if it is not found"
-  },
-  {
-    "code": "%",
-    "label": "A % sign"
-  }
-]
+{
+  "formats": [
+    {
+      "code": "a",
+      "label": "Abbreviated weekday name"
+    },
+    {
+      "code": "A",
+      "label": "Full weekday name"
+    },
+    {
+      "code": "b",
+      "label": "Abbreviated month name"
+    },
+    {
+      "code": "B",
+      "label": "Full month name"
+    },
+    {
+      "code": "C",
+      "label": "Century number (year/100) as a 2-digit integer"
+    },
+    {
+      "code": "d",
+      "label": "Day of the month, padded to 2 digits (01-31)"
+    },
+    {
+      "code": "D",
+      "label": "Equivalent to <code>%m/%d/%y</code> in en-US"
+    },
+    {
+      "code": "e",
+      "label": "Day of the month, padded with a leading space for single digit values (1-31)"
+    },
+    {
+      "code": "F",
+      "label": "Equivalent to <code>%Y-%m-%d</code> (the ISO 8601 date format)"
+    },
+    {
+      "code": "h",
+      "label": "Equivalent to <code>%b</code> (abbreviated month name)"
+    },
+    {
+      "code": "H",
+      "label": "The hour (24-hour clock), padded to 2 digits (00-23)"
+    },
+    {
+      "code": "I",
+      "label": "The hour (12-hour clock), padded to 2 digits (01-12)"
+    },
+    {
+      "code": "j",
+      "label": "Day of the year, padded to 3 digits (001-366)"
+    },
+    {
+      "code": "k",
+      "label": "The hour (24-hour clock), padded with a leading space for single digit values (0-23)"
+    },
+    {
+      "code": "l",
+      "label": "The hour (12-hour clock), padded with a leading space for single digit values (1-12)"
+    },
+    {
+      "code": "m",
+      "label": "The month, padded to 2 digits (01-12)"
+    },
+    {
+      "code": "n",
+      "label": "Newline character"
+    },
+    {
+      "code": "M",
+      "label": "The minute, padded to 2 digits (00-59)"
+    },
+    {
+      "code": "p",
+      "label": "\"AM\" or \"PM\""
+    },
+    {
+      "code": "P",
+      "label": "\"am\" or \"PM\""
+    },
+    {
+      "code": "r",
+      "label": "Equivalent to <code>%I:%M:%S %p</code> (time in a.m. or p.m. notation)"
+    },
+    {
+      "code": "R",
+      "label": "Equivalent to <code>%H:%M</code> (time in 24-hour notation)"
+    },
+    {
+      "code": "s",
+      "label": "N umber of seconds since the Epoch (1970-01-01 00:00:00 +0000), UTC"
+    },
+    {
+      "code": "S",
+      "label": "The second, padded to 2 digits (00-60)"
+    },
+    {
+      "code": "t",
+      "label": "Tab character"
+    },
+    {
+      "code": "T",
+      "label": "Equivalent to <code>%H:%M:%S</code> (time in 24-hour notation)"
+    },
+    {
+      "code": "u",
+      "label": "Weekday, Monday being 1 (1-7)"
+    },
+    {
+      "code": "U",
+      "label": "Week number of the year, Sunday as the first day of the week, padded to 2 digits (00-53)"
+    },
+    {
+      "code": "w",
+      "label": "Weekday, Sunday being 0 (0-6)"
+    },
+    {
+      "code": "W",
+      "label": "Week number of the year, Monday as the first day of the week, padded to 2 digits (00-53)"
+    },
+    {
+      "code": "y",
+      "label": "The year without the century (00-99)"
+    },
+    {
+      "code": "Y",
+      "label": "The year with the century"
+    },
+    {
+      "code": "z",
+      "label": "The <code>+hhmm</code> or <code>-hhmm</code> numeric timezone (that is, the hour and minute offset from UTC)"
+    },
+    {
+      "code": "Z",
+      "label": "The time zone name, replaced with an empty string if it is not found"
+    },
+    {
+      "code": "%",
+      "label": "A % sign"
+    }
+  ],
+  "flags": [
+    {
+      "char": "_",
+      "label": "(underscore) Pad a numeric result string with spaces"
+    },
+    {
+      "char": "-",
+      "label": "(dash) Omit leading zeroes or spaces"
+    },
+    {
+      "char": "0",
+      "label": "Force the use of zeroes as padding characters"
+    }
+  ]
+}

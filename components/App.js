@@ -8,9 +8,9 @@ import ReferenceTable from './ReferenceTable';
 
 import '../styles/index.css';
 
-import referenceEntries from 'json!../reference.json';
+import reference from 'json!../reference.json';
 
-const supportedCodes = referenceEntries.map(entry => `%${entry.code}`);
+const { formats, flags } = reference;
 
 export default class App extends Component {
   state = {
@@ -49,7 +49,7 @@ export default class App extends Component {
     const date = new Date(this.props.date);
 
     const searchQuery = this.state.searchQuery;
-    const displayedEntries = searchQuery.length ? searchReference(searchQuery, referenceEntries) : referenceEntries;
+    const displayedEntries = searchQuery.length ? searchReference(searchQuery, formats) : formats;
 
     return (
       <html>
@@ -89,7 +89,8 @@ export default class App extends Component {
               <div className='repl-container' ref='repl'>
                 <Repl
                   value={this.props.format}
-                  supportedCodes={supportedCodes}
+                  formats={formats.map(format => format.code)}
+                  flags={flags.map(flag => flag.char)}
                   date={date}
                 />
               </div>
