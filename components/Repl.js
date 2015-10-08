@@ -89,8 +89,8 @@ class FormattedString extends Component {
 export default class Repl extends Component {
   static propTypes = {
     format: PropTypes.string,
-    formats: PropTypes.array,
-    flags: PropTypes.array
+    formats: PropTypes.arrayOf(PropTypes.string),
+    flags: PropTypes.arrayOf(PropTypes.string)
   }
 
   static defaultProps = {
@@ -120,14 +120,12 @@ export default class Repl extends Component {
           onChange={this.handleFormatChange.bind(this)}
           initialValue={this.props.value}
           regex={regex}
-          supportedCodes={this.props.supportedCodes}
         />
         <div className='result'>
           <FormattedString
             date={this.props.date}
             content={this.state.format}
             regex={regex}
-            supportedCodes={this.props.supportedCodes}
           />
         </div>
       </div>

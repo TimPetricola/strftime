@@ -3,47 +3,44 @@ import React, { Component, PropTypes } from 'react';
 import { color } from '../utils';
 
 import FormattedDate from './FormattedDate';
-import referenceEntries from 'json!../reference.json';
 
-export default class ReferenceTable extends Component {
+export default class FormatsReferenceTable extends Component {
   static propTypes = {
     entries: PropTypes.arrayOf(
       PropTypes.shape({
-        code: PropTypes.string.isRequired,
+        format: PropTypes.string.isRequired,
         label: PropTypes.string.isRequired
       })
     ).isRequired
   }
 
   renderRow(entry) {
-    const { code, label } = entry;
-    const usedCode = `%${code}`;
+    const { format, label } = entry;
+    const usedFormat = `%${format}`;
 
     return (
-      <tr data-code={usedCode} key={usedCode}>
-        <td><code>{usedCode}</code></td>
+      <tr key={format}>
+        <td><code>{usedFormat}</code></td>
         <td dangerouslySetInnerHTML={{__html: label}}></td>
         <td>
-          <FormattedDate format={usedCode} date={this.props.date} />
+          <FormattedDate format={usedFormat} date={this.props.date} />
         </td>
       </tr>
     );
   }
 
   render() {
-    const { entries } = this.props;
-
     return (
       <table className='reference-table'>
         <thead>
           <tr>
-            <th>Code</th>
-            <th>Meaning</th>
-            <th>Example</th>
+            <th>Format</th>
+            <th className='full-width'>Meaning</th>
+            <th>Output</th>
           </tr>
         </thead>
         <tbody>
-          { entries.map(entry => this.renderRow(entry)) }
+          { this.props.entries.map(entry => this.renderRow(entry)) }
         </tbody>
       </table>
     );

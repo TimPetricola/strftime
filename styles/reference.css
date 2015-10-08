@@ -53,3 +53,8 @@
   font-size: 14px;
   color: rgba(0, 0, 0, .54);
 }
+
+.reference-table code {
+  background-color: rgba(0, 0, 0, .05);
+  padding: 2px;
+}

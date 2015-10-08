@@ -34,6 +34,10 @@ code {
   font-family: var(--monospace);
 }
 
+.full-width {
+  width: 100%;
+}
+
 @import './header.css';
 @import './repl.css';
 @import './reference.css';

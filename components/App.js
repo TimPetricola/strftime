@@ -4,7 +4,8 @@ import { searchReference } from '../utils';
 
 import FormattedDate from './FormattedDate';
 import Repl from './Repl';
-import ReferenceTable from './ReferenceTable';
+import FormatsReferenceTable from './FormatsReferenceTable';
+import FlagsReferenceTable from './FlagsReferenceTable';
 
 import '../styles/index.css';
 
@@ -89,8 +90,8 @@ export default class App extends Component {
               <div className='repl-container' ref='repl'>
                 <Repl
                   value={this.props.format}
-                  formats={formats.map(format => format.code)}
-                  flags={flags.map(flag => flag.char)}
+                  formats={formats.map(format => format.format)}
+                  flags={flags.map(flag => flag.flag)}
                   date={date}
                 />
               </div>
@@ -98,8 +99,15 @@ export default class App extends Component {
           }
           {
             displayedEntries.length ?
-              <ReferenceTable entries={displayedEntries} date={date} /> :
-              <p className='reference-table reference-table-empty'>No results</p>
+              <FormatsReferenceTable entries={displayedEntries} date={date} /> :
+              <p className='reference-table reference-table-empty'>
+                No format found.
+              </p>
+          }
+          {
+            formats.length ?
+              <FlagsReferenceTable entries={flags} />
+              : null
           }
           <script src='/bundle.js'></script>
         </body>

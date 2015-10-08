@@ -33,8 +33,8 @@ export function searchReference(q, entries) {
 
   return entries.filter((entry) => (
     // Code matches
-    entry.code.toLowerCase() === q.replace('%', '') ||
+    entry.format.toLowerCase() === q.replace('%', '') ||
     // Label matches
-    q.length >= 3 && entry.label.toLowerCase().indexOf(q) > -1
+    q.length >= 2 && entry.label.toLowerCase().indexOf(q) > -1
   ));
 }
