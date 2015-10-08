@@ -61,13 +61,14 @@ body:before {
   border: 0;
   border-bottom: 1px solid rgba(255, 255, 255, .3);
   font-size: 16px;
-}
-
-.search-input::placeholder {
-  color: rgba(255, 255, 255, .7);
+  transition: .2s border-color var(--animation-curve);
 }
 
 .search-input:focus {
   border-color: rgba(255, 255, 255, 7);
   outline: 0;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, .7);
 }

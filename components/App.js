@@ -80,7 +80,7 @@ export default class App extends Component {
               this.state.hasSearch ?
                 <label className='search-field'>
                   <i className='search-icon'></i>
-                  <input className='search-input' type="text" value={searchQuery} onChange={this.handleChange.bind(this)} placeholder='Search' />
+                  <input className='search-input' type='text' value={searchQuery} onChange={this.handleChange.bind(this)} placeholder='Search' />
                 </label>
                 : null
             }
