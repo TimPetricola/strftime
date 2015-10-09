@@ -8,13 +8,15 @@ export default class Repl extends Component {
     value: PropTypes.string,
     formats: PropTypes.arrayOf(PropTypes.string),
     flags: PropTypes.arrayOf(PropTypes.string),
-    date: React.PropTypes.instanceOf(Date).isRequired
+    date: PropTypes.instanceOf(Date).isRequired,
+    onChange: PropTypes.func
   }
 
   static defaultProps = {
     value: '',
     formats: [],
-    flags: []
+    flags: [],
+    onChange: () => {}
   }
 
   constructor(props) {
@@ -37,7 +39,9 @@ export default class Repl extends Component {
   }
 
   handleChange(event) {
-    this.setState({ format: event.target.value });
+    const format = event.target.value;
+    this.setState({ format: format });
+    this.props.onChange(format);
   }
 
   coloredFormat() {

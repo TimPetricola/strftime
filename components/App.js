@@ -30,16 +30,28 @@ export default class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.hasRepl !== this.state.hasRepl) {
-      const repl = this.refs.repl;
-      const padding = repl ? findDOMNode(repl).offsetHeight : 0;
+      this.setBodyPadding();
+    }
+  }
+
+  setBodyPadding() {
+    const repl = this.refs.repl;
+    const padding = repl ? findDOMNode(repl).offsetHeight : 0;
+
+    if (padding !== this.state.bodyPaddingBottom) {
       this.setState({ bodyPaddingBottom: padding });
     }
   }
 
-  handleChange(event) {
+  handleSearchChange(event) {
     this.setState({
       searchQuery: event.target.value
     });
+  }
+
+  handleReplChange() {
+    // Timeout to ensure that REPL DOM has been updated
+    setTimeout(this.setBodyPadding.bind(this), 0);
   }
 
   render() {
@@ -82,7 +94,13 @@ export default class App extends Component {
               this.state.hasSearch ?
                 <label className='search-field'>
                   <i className='search-icon'></i>
-                  <input className='search-input' type='text' value={searchQuery} onChange={this.handleChange.bind(this)} placeholder='Search' />
+                  <input
+                    className='search-input'
+                    type='text'
+                    value={searchQuery}
+                    onChange={this.handleSearchChange.bind(this)}
+                    placeholder='Search'
+                  />
                 </label>
                 : null
             }
@@ -95,6 +113,7 @@ export default class App extends Component {
                   formats={formats.map(format => format.format)}
                   flags={flags.map(flag => flag.flag)}
                   date={date}
+                  onChange={this.handleReplChange.bind(this)}
                 />
               </div>
               : null
