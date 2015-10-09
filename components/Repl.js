@@ -73,8 +73,6 @@ export default class Repl extends Component {
   }
 
   render() {
-    const { formats, flags, date } = this.props;
-
     return (
       <div className='repl'>
         <div className='repl-row'>
