@@ -4,6 +4,34 @@ import { findDOMNode } from 'react-dom';
 import ColoredText from './ColoredText';
 import FormattedDate from './FormattedDate';
 
+function outputRegex(flags, formats) {
+  return new RegExp(
+    `(%(?:${flags.join('|')})?(?:${formats.join('|')}))`
+  );
+}
+
+const ColoredFormatPart = ({format, convertToDate: date}) => (
+  <ColoredText colorKey={format}>
+    {
+      date
+        ? <FormattedDate format={format} date={date} />
+        : format
+    }
+  </ColoredText>
+);
+
+const ColoredFormat = ({format, regex, convertToDate: date}) => (
+  <span>
+    {
+      format.split(regex).map((part, i) => (
+        part.match(regex)
+          ? <ColoredFormatPart key={i} format={part} convertToDate={date} />
+          : <span key={i}>{part}</span>
+      ))
+    }
+  </span>
+);
+
 export default class Repl extends Component {
   static propTypes = {
     value: PropTypes.string,
@@ -20,16 +48,8 @@ export default class Repl extends Component {
     onChange: () => {}
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      format: props.value
-    }
-
-    this.regex = new RegExp(
-      `(%(?:${props.flags.join('|')})?(?:${props.formats.join('|')}))`
-    );
+  state = {
+    format: this.props.value
   }
 
   componentDidMount() {
@@ -45,54 +65,25 @@ export default class Repl extends Component {
     this.props.onChange(format);
   }
 
-  coloredFormat() {
-    return this.state.format.split(this.regex).map((part, i) => {
-      if(part.match(this.regex)) {
-        return (
-          <ColoredText colorKey={part} key={i}>
-            {part}
-          </ColoredText>
-        );
-      } else {
-        return <span key={i}>{part}</span>;
-      }
-    });
-  }
-
-  renderFormattedDate() {
-    const { date } = this.props;
-    const { format } = this.state;
-    const { regex } = this;
-
-    return format.split(regex).map((part, i) => {
-      if (part.match(regex)) {
-        return (
-          <ColoredText colorKey={part} key={i}>
-            <FormattedDate format={part} date={date} />
-          </ColoredText>
-        );
-      } else {
-        return <span key={i}>{part}</span>;
-      }
-    }.bind(this));
-  }
-
   render() {
+    const { props: { date, flags, formats, value }, state: { format }} = this;
+    const regex = outputRegex(flags, formats);
+
     return (
       <div className='repl'>
         <div className='repl-row'>
           <label className='repl-label'>Input</label>
           <div className='repl-field'>
             <span className='repl-io repl-highlight'>
-              {this.coloredFormat()}
+              <ColoredFormat regex={regex} format={format} />
             </span>
             <input
               type='text'
               ref='input'
-              value={this.state.format}
+              value={format}
               className='repl-io repl-input'
               onChange={this.handleChange.bind(this)}
-              placeholder={`Type a format string here, .e.g ${this.props.value}`}
+              placeholder={`Type a format string here, .e.g ${value}`}
             />
           </div>
         </div>
@@ -100,7 +91,7 @@ export default class Repl extends Component {
           <span className='repl-label'>Output</span>
           <div className='repl-field'>
             <code className='repl-io'>
-              {this.renderFormattedDate()}
+              <ColoredFormat regex={regex} format={format} convertToDate={date} />
             </code>
           </div>
         </div>

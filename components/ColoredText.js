@@ -2,20 +2,14 @@ import React, { Component, PropTypes } from 'react';
 
 import { color } from '../utils';
 
-export default class ColoredText extends Component {
-  static propTypes = {
-    colorKey: PropTypes.string.isRequired
-  }
+const ColoredText = ({colorKey, children}) => (
+  <span style={{ backgroundColor: color(colorKey) }}>
+    {children}
+  </span>
+);
 
-  render() {
-    const style = {
-      backgroundColor: color(this.props.colorKey)
-    };
-
-    return (
-      <span style={style}>
-        {this.props.children}
-      </span>
-    );
-  }
+ColoredText.propTypes = {
+  colorKey: PropTypes.string.isRequired
 };
+
+export default ColoredText;

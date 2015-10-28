@@ -4,45 +4,38 @@ import { color } from '../utils';
 
 import FormattedDate from './FormattedDate';
 
-export default class FormatsReferenceTable extends Component {
-  static propTypes = {
-    entries: PropTypes.arrayOf(
-      PropTypes.shape({
-        format: PropTypes.string.isRequired,
-        label: PropTypes.string.isRequired
-      })
-    ).isRequired
-  }
+const Row = ({date, entry: {format, label}}) => (
+  <tr>
+    <td><code>%{format}</code></td>
+    <td dangerouslySetInnerHTML={{__html: label}}></td>
+    <td>
+      <FormattedDate format={`%${format}`} date={date} />
+    </td>
+  </tr>
+);
 
-  renderRow(entry) {
-    const { format, label } = entry;
-    const usedFormat = `%${format}`;
-
-    return (
-      <tr key={format}>
-        <td><code>{usedFormat}</code></td>
-        <td dangerouslySetInnerHTML={{__html: label}}></td>
-        <td>
-          <FormattedDate format={usedFormat} date={this.props.date} />
-        </td>
+const Table = ({entries, date}) => (
+  <table className='reference-table'>
+    <thead>
+      <tr>
+        <th>Format</th>
+        <th className='full-width'>Meaning</th>
+        <th>Output</th>
       </tr>
-    );
-  }
+    </thead>
+    <tbody>
+      { entries.map(e => <Row key={e.format} entry={e} date={date} />) }
+    </tbody>
+  </table>
+);
 
-  render() {
-    return (
-      <table className='reference-table'>
-        <thead>
-          <tr>
-            <th>Format</th>
-            <th className='full-width'>Meaning</th>
-            <th>Output</th>
-          </tr>
-        </thead>
-        <tbody>
-          { this.props.entries.map(entry => this.renderRow(entry)) }
-        </tbody>
-      </table>
-    );
-  }
-};
+Table.propTypes = {
+  entries: PropTypes.arrayOf(
+    PropTypes.shape({
+      format: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired
+    })
+  ).isRequired
+}
+
+export default Table;

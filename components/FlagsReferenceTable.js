@@ -1,41 +1,33 @@
 import React, { Component, PropTypes } from 'react';
 
-export default class FlagsReferenceTable extends Component {
-  static propTypes = {
-    entries: PropTypes.arrayOf(
-      PropTypes.shape({
-        flag: PropTypes.string.isRequired,
-        label: PropTypes.string.isRequired
-      })
-    ).isRequired
-  }
+const Row = ({entry: {flag, label}}) => (
+  <tr key={flag}>
+    <td><code>{flag}</code></td>
+    <td dangerouslySetInnerHTML={{__html: label}}></td>
+  </tr>
+);
 
-  renderRow(entry) {
-    const { flag, label } = entry;
-
-    return (
-      <tr key={flag}>
-        <td><code>{flag}</code></td>
-        <td dangerouslySetInnerHTML={{__html: label}}></td>
+const Table = ({entries}) => (
+  <table className='reference-table'>
+    <thead>
+      <tr>
+        <th>Flag</th>
+        <th className='full-width'>Meaning</th>
       </tr>
-    );
-  }
+    </thead>
+    <tbody>
+      { entries.map(e => <Row key={e.flag} entry={e} />) }
+    </tbody>
+  </table>
+);
 
-  render() {
-    const { entries } = this.props;
-
-    return (
-      <table className='reference-table'>
-        <thead>
-          <tr>
-            <th>Flag</th>
-            <th className='full-width'>Meaning</th>
-          </tr>
-        </thead>
-        <tbody>
-          { entries.map(entry => this.renderRow(entry)) }
-        </tbody>
-      </table>
-    );
-  }
+Table.propTypes = {
+  entries: PropTypes.arrayOf(
+    PropTypes.shape({
+      flag: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired
+    })
+  ).isRequired
 };
+
+export default Table;
