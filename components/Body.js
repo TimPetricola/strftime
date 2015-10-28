@@ -27,12 +27,14 @@ export default class Body extends Component {
     hasRepl: false, // do not render REPL on the backend
     hasSearch: false, // do not render search on the backend
     bodyPaddingBottom: 0,
-    searchQuery: ''
+    searchQuery: '',
+    date: new Date(this.props.date)
   }
 
   constructor(props) {
     super(props)
 
+    this.resetDate = this.resetDate.bind(this);
     this.setBodyPadding = this.setBodyPadding.bind(this);
     this.handleSearchChange = this.handleSearchChange.bind(this);
     this.handleReplChange = this.handleReplChange.bind(this);
@@ -44,12 +46,26 @@ export default class Body extends Component {
       hasRepl: true,
       hasSearch: true
     });
+
+    // use real date instead of the one defined by the server
+    this.resetDate()
+
+    // keep date in real time
+    this.timeInterval = setInterval(this.resetDate, 1000);
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.hasRepl !== this.state.hasRepl) {
       this.setBodyPadding();
     }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timeInterval)
+  }
+
+  resetDate() {
+    this.setState({ date: new Date() });
   }
 
   // REPL takes some room at the bottom of the page, padding is needed
@@ -74,8 +90,7 @@ export default class Body extends Component {
 
   render() {
     const { format, formats, flags } = this.props;
-    const { searchQuery, hasSearch, hasRepl, bodyPaddingBottom } = this.state;
-    const date = new Date(this.props.date);
+    const { searchQuery, hasSearch, hasRepl, bodyPaddingBottom, date } = this.state;
 
     const displayedEntries = searchQuery.length ? searchReference(searchQuery, formats) : formats;
     return (
