@@ -12,16 +12,15 @@ function outputRegex(flags, formats) {
 
 const ColoredFormatPart = ({format, convertToDate: date}) => (
   <ColoredText colorKey={format}>
-    {
-      date
-        ? <FormattedDate format={format} date={date} />
-        : format
+    { date
+      ? <FormattedDate format={format} date={date} />
+      : format
     }
   </ColoredText>
 );
 
-const ColoredFormat = ({format, regex, convertToDate: date}) => (
-  <span>
+const ColoredFormat = ({format, regex, convertToDate: date, ...props}) => (
+  <span {...props}>
     {
       format.split(regex).map((part, i) => (
         part.match(regex)
@@ -80,9 +79,7 @@ export default class Repl extends Component {
         <div className='repl-row'>
           <label className='repl-label'>Input</label>
           <div className='repl-field'>
-            <span className='repl-io repl-highlight'>
-              <ColoredFormat regex={regex} format={format} />
-            </span>
+            <ColoredFormat regex={regex} format={format} className='repl-io repl-highlight' />
             <input
               type='text'
               ref='input'
