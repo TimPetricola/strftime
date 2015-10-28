@@ -1,4 +1,5 @@
-import React, { Component, findDOMNode } from 'react';
+import React, { Component } from 'react';
+import { findDOMNode } from 'react-dom';
 
 import { searchReference } from '../utils';
 
