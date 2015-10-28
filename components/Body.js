@@ -3,6 +3,7 @@ import { findDOMNode } from 'react-dom';
 
 import { searchReference } from '../utils';
 
+import Icon from './Icon';
 import FormattedDate from './FormattedDate';
 import Repl from './Repl';
 import FormatsReferenceTable from './FormatsReferenceTable';
@@ -10,7 +11,7 @@ import FlagsReferenceTable from './FlagsReferenceTable';
 
 const Search = ({query, onChange}) => (
   <label className='search-field'>
-    <i className='search-icon'></i>
+    <Icon icon='search' className='search-icon' />
     <input
       className='search-input'
       type='text'

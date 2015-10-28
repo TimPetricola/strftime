@@ -48,7 +48,6 @@ body:before {
   display: inline-block;
   width: 24px;
   height: 24px;
-  background-image: url('/icons/search.svg');
 }
 
 .search-input {
