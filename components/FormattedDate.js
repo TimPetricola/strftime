@@ -11,19 +11,15 @@ function formattedDate(format, date) {
   return formatted;
 }
 
-export default class FormattedDate extends Component {
-  static propTypes = {
-    format: React.PropTypes.string.isRequired,
-    date: React.PropTypes.instanceOf(Date).isRequired
-  }
+const FormattedDate = ({format, date, ...props}) => (
+  <span {...props}>
+    {formattedDate(format, date)}
+  </span>
+);
 
-  render() {
-    const {format, date, ...props} = this.props;
-
-    return (
-      <span {...props}>
-        {formattedDate(format, date)}
-      </span>
-    );
-  }
+FormattedDate.propTypes = {
+  format: PropTypes.string.isRequired,
+  date: PropTypes.instanceOf(Date).isRequired
 };
+
+export default FormattedDate;

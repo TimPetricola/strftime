@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 
 const icons = {
   'search': (
@@ -9,23 +9,19 @@ const icons = {
   )
 };
 
-export default class Icon extends React.Component {
-  static propTypes = {
-    icon: React.PropTypes.oneOf(Object.keys(icons)).isRequired
-  }
+const Icon = ({icon, ...props}) => (
+  <svg
+    fill='currentColor'
+    viewBox='0 0 24 24'
+    fit
+    {...props}
+  >
+    {icons[icon]}
+  </svg>
+);
 
-  render() {
-    const {icon, ...props} = this.props;
+Icon.propTypes = {
+  icon: PropTypes.oneOf(Object.keys(icons)).isRequired
+};
 
-    return (
-      <svg
-        fill='currentColor'
-        viewBox='0 0 24 24'
-        fit
-        {...props}
-      >
-        {icons[icon]}
-      </svg>
-    );
-  }
-}
+export default Icon;
