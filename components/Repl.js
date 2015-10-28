@@ -52,6 +52,12 @@ export default class Repl extends Component {
     format: this.props.value
   }
 
+  constructor(props) {
+    super(props)
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
   componentDidMount() {
     // Set focus at the end of input
     const node = findDOMNode(this.refs.input);
@@ -82,7 +88,7 @@ export default class Repl extends Component {
               ref='input'
               value={format}
               className='repl-io repl-input'
-              onChange={this.handleChange.bind(this)}
+              onChange={this.handleChange}
               placeholder={`Type a format string here, .e.g ${value}`}
             />
           </div>

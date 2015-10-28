@@ -30,6 +30,14 @@ export default class Body extends Component {
     searchQuery: ''
   }
 
+  constructor(props) {
+    super(props)
+
+    this.setBodyPadding = this.setBodyPadding.bind(this);
+    this.handleSearchChange = this.handleSearchChange.bind(this);
+    this.handleReplChange = this.handleReplChange.bind(this);
+  }
+
   componentDidMount() {
     // render REPL and search on the frontend
     this.setState({
@@ -61,7 +69,7 @@ export default class Body extends Component {
 
   handleReplChange() {
     // Timeout to ensure that REPL DOM has been updated
-    setTimeout(this.setBodyPadding.bind(this), 0);
+    setTimeout(this.setBodyPadding, 0);
   }
 
   render() {
@@ -77,7 +85,7 @@ export default class Body extends Component {
           {' '}
           <p className='credits'>by <a href='http://timpetricola.com'>Tim Petricola</a> on <a href='https://github.com/TimPetricola/strftime'>GitHub</a></p>
           { hasSearch
-            ? <Search query={searchQuery} onChange={this.handleSearchChange.bind(this)} />
+            ? <Search query={searchQuery} onChange={this.handleSearchChange} />
             : null
           }
         </header>
@@ -89,7 +97,7 @@ export default class Body extends Component {
                 formats={formats.map(format => format.format)}
                 flags={flags.map(flag => flag.flag)}
                 date={date}
-                onChange={this.handleReplChange.bind(this)}
+                onChange={this.handleReplChange}
               />
             </div>
           : null
