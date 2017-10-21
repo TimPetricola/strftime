@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from "react"
+import PropTypes from "prop-types"
 
-import { color } from '../utils';
+import { color } from "../utils"
 
-const ColoredText = ({colorKey, children}) => (
-  <span style={{ backgroundColor: color(colorKey) }}>
-    {children}
-  </span>
-);
+const ColoredText = ({ colorKey, children }) => (
+  <span style={{ backgroundColor: color(colorKey) }}>{children}</span>
+)
 
 ColoredText.propTypes = {
   colorKey: PropTypes.string.isRequired
-};
+}
 
-export default ColoredText;
+export default ColoredText
