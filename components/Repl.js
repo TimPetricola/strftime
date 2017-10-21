@@ -76,7 +76,9 @@ export default class Repl extends Component {
     return (
       <div className="repl">
         <div className="repl-row">
-          <label className="repl-label">Input</label>
+          <label className="repl-label" for="repl-input">
+            Input
+          </label>
           <div className="repl-field">
             <ColoredFormat
               regex={regex}
@@ -87,6 +89,7 @@ export default class Repl extends Component {
               type="text"
               ref="input"
               value={format}
+              id="repl-input"
               className="repl-io repl-input"
               onChange={this.handleChange}
               placeholder={`Type a format string here, .e.g ${value}`}
