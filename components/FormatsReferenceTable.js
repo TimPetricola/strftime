@@ -1,6 +1,5 @@
-import React, { Component, PropTypes } from 'react';
-
-import { color } from '../utils';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import FormattedDate from './FormattedDate';
 

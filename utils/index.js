@@ -1,11 +1,6 @@
 import randomColor from 'randomcolor';
 
-let colors = {};
-
-export function color(key, seed = 1) {
-  colors[key] = colors[key] || randomColor({ luminosity: 'light', seed: seed });
-  return colors[key];
-}
+export const color = key => randomColor({ luminosity: 'light', seed: key })
 
 export function searchReference(q, entries) {
   q = q.toLowerCase().trim();

@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 const icons = {
   'search': (
@@ -13,7 +14,7 @@ const Icon = ({icon, ...props}) => (
   <svg
     fill='currentColor'
     viewBox='0 0 24 24'
-    fit
+    fit="true"
     {...props}
   >
     {icons[icon]}
