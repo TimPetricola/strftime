@@ -1,32 +1,31 @@
 {
+  "private": true,
   "name": "strftime-reference",
-  "description": "",
-  "author": "Tim Petricola <tim.petricola@gmail.com>",
   "version": "0.0.0",
+  "license": "MIT",
   "scripts": {
-    "dev": "webpack-dev-server --progress --colors",
-    "build": "NODE_ENV=production webpack -p --progress --colors",
-    "lint": "eslint ./src/js"
+    "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
+    "build": "preact build --template src/template.html",
+    "serve": "preact build --template src/template.html && preact serve",
+    "dev": "preact watch --template src/template.html",
+    "lint": "eslint src"
   },
+  "eslintIgnore": [
+    "build/*"
+  ],
   "devDependencies": {
-    "autoprefixer": "^6.0.3",
-    "babel-core": "^5.8.25",
-    "babel-loader": "^5.3.2",
-    "css-loader": "^0.19.0",
-    "extract-text-webpack-plugin": "^0.8.2",
-    "json-loader": "^0.5.3",
-    "postcss-custom-properties": "^5.0.0",
-    "postcss-import": "^7.0.0",
-    "postcss-loader": "^0.6.0",
-    "prettier": "^1.7.4",
-    "prop-types": "^15.6.0",
-    "randomcolor": "^0.4.0",
-    "react": "^16.0.0",
-    "react-dom": "^16.0.0",
-    "static-site-generator-webpack-plugin": "^1.2.0",
-    "strftime": "^0.9.2",
-    "style-loader": "^0.12.4",
-    "webpack": "^1.12.2",
-    "webpack-dev-server": "^1.12.0"
+    "autoprefixer": "^9.4.4",
+    "eslint": "^4.5.0",
+    "eslint-config-synacor": "^1.1.0",
+    "if-env": "^1.0.0",
+    "postcss-custom-properties": "^8.0.9",
+    "postcss-import": "^12.0.1",
+    "preact-cli": "^2.0.0"
+  },
+  "dependencies": {
+    "preact": "^8.2.1",
+    "preact-compat": "^3.17.0",
+    "randomcolor": "^0.5.3",
+    "strftime": "^0.10.0"
   }
 }

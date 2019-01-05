@@ -3,14 +3,18 @@
     "es6": true,
     "browser": true
   },
-  "extends": "eslint:recommended",
-  "ecmaFeatures": {
-    "jsx": true,
-    "classes": true,
-    "experimentalObjectRestSpread": true,
-    "modules": true
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "classes": true,
+      "experimentalObjectRestSpread": true
+    }
   },
-  "plugins": [
-    "react"
-  ]
+  "extends": ["eslint:recommended", "plugin:react/recommended"],
+  "plugins": ["react"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": "off"
+  }
 }

@@ -1,5 +1,5 @@
 body:before {
-  content: '';
+  content: "";
   display: block;
   background-color: var(--primary-color);
   width: 100%;
@@ -14,31 +14,44 @@ body:before {
   position: relative;
   z-index: 1;
   background-color: var(--primary-color);
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 960px) {
+  .page-head {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 .page-title {
   font-size: 24px;
   font-weight: 300;
-  margin: 24px 0;
   display: inline-block;
+}
+
+.page-title-credits {
+  margin-right: 24px;
+  white-space: nowrap;
 }
 
 .credits {
   display: inline-block;
-  color: rgba(255, 255, 255, .3);
+  color: rgba(255, 255, 255, 0.3);
 }
 
 .credits a {
   text-decoration: none;
-  color: rgba(255, 255, 255, .7);
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .search-field {
-  position: absolute;
-  top: 12px;
-  right: 0;
-  display: block;
-  width: 200px;
+  position: relative;
+  max-width: 200px;
 }
 
 .search-icon {
@@ -58,9 +71,9 @@ body:before {
   font-weight: 300;
   color: #fff;
   border: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, .3);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   font-size: 16px;
-  transition: .2s border-color var(--animation-curve);
+  transition: 0.2s border-color var(--animation-curve);
   width: 100%;
 }
 
@@ -70,5 +83,5 @@ body:before {
 }
 
 .search-input::placeholder {
-  color: rgba(255, 255, 255, .7);
+  color: rgba(255, 255, 255, 0.7);
 }

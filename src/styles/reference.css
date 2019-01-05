@@ -12,7 +12,7 @@
 .reference-table-empty {
   padding: 24px;
   text-align: center;
-  color: rgba(0, 0, 0, .38);
+  color: rgba(0, 0, 0, 0.38);
 }
 
 .reference-table thead {
@@ -51,10 +51,10 @@
   text-overflow: ellipsis;
   padding: 12px 18px 8px;
   font-size: 14px;
-  color: rgba(0, 0, 0, .54);
+  color: rgba(0, 0, 0, 0.54);
 }
 
 .reference-table code {
-  background-color: rgba(0, 0, 0, .05);
+  background-color: rgba(0, 0, 0, 0.05);
   padding: 2px;
 }

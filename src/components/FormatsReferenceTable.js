@@ -1,4 +1,3 @@
-import React, { Component } from "react"
 import PropTypes from "prop-types"
 
 import FormattedDate from "./FormattedDate"
@@ -25,7 +24,9 @@ const Table = ({ entries, date }) => (
       </tr>
     </thead>
     <tbody>
-      {entries.map(e => <Row key={e.format} entry={e} date={date} />)}
+      {entries.map(e => (
+        <Row key={e.format} entry={e} date={date} />
+      ))}
     </tbody>
   </table>
 )

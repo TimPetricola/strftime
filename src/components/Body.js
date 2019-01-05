@@ -1,10 +1,8 @@
-import React, { Component } from "react"
-import { findDOMNode } from "react-dom"
+import { Component } from "preact"
 
 import { searchReference } from "../utils"
 
 import Icon from "./Icon"
-import FormattedDate from "./FormattedDate"
 import Repl from "./Repl"
 import FormatsReferenceTable from "./FormatsReferenceTable"
 import FlagsReferenceTable from "./FlagsReferenceTable"
@@ -16,23 +14,23 @@ const Search = ({ query, onChange }) => (
       className="search-input"
       type="text"
       value={query}
-      onChange={onChange}
+      onInput={onChange}
       placeholder="Search"
     />
   </label>
 )
 
 export default class Body extends Component {
-  state = {
-    hasRepl: false, // do not render REPL on the backend
-    hasSearch: false, // do not render search on the backend
-    bodyPaddingBottom: 0,
-    searchQuery: "",
-    date: new Date(this.props.date)
-  }
-
   constructor(props) {
     super(props)
+
+    this.state = {
+      hasRepl: false, // do not render REPL on the backend
+      hasSearch: false, // do not render search on the backend
+      bodyPaddingBottom: 0,
+      searchQuery: "",
+      date: new Date(this.props.date)
+    }
 
     this.resetDate = this.resetDate.bind(this)
     this.setBodyPadding = this.setBodyPadding.bind(this)
@@ -71,8 +69,7 @@ export default class Body extends Component {
   // REPL takes some room at the bottom of the page, padding is needed
   // to see bottom of reference
   setBodyPadding() {
-    const repl = this.refs.repl
-    const padding = repl ? findDOMNode(repl).offsetHeight : 0
+    const padding = this.repl ? this.repl.offsetHeight : 0
 
     if (padding !== this.state.bodyPaddingBottom) {
       this.setState({ bodyPaddingBottom: padding })
@@ -80,7 +77,9 @@ export default class Body extends Component {
   }
 
   handleSearchChange(event) {
-    this.setState({ searchQuery: event.target.value })
+    this.setState({
+      searchQuery: event.target.value
+    })
   }
 
   handleReplChange() {
@@ -102,20 +101,22 @@ export default class Body extends Component {
       ? searchReference(searchQuery, formats)
       : formats
     return (
-      <body style={{ paddingBottom: bodyPaddingBottom }}>
+      <div style={{ paddingBottom: bodyPaddingBottom }}>
         <header className="page-head">
-          <h1 className="page-title">strftime</h1>{" "}
-          <p className="credits">
-            by <a href="http://timpetricola.com">Tim Petricola</a> on{" "}
-            <a href="https://github.com/TimPetricola/strftime">GitHub</a>
-          </p>
+          <div className="page-title-credits">
+            <h1 className="page-title">strftime</h1>{" "}
+            <p className="credits">
+              by <a href="http://timpetricola.com">Tim Petricola</a> on{" "}
+              <a href="https://github.com/TimPetricola/strftime">GitHub</a>
+            </p>
+          </div>
           {hasSearch ? (
             <Search query={searchQuery} onChange={this.handleSearchChange} />
           ) : null}
         </header>
 
         {hasRepl ? (
-          <div className="repl-container" ref="repl">
+          <div className="repl-container" ref={repl => (this.repl = repl)}>
             <Repl
               value={format}
               formats={formats.map(format => format.format)}
@@ -135,8 +136,7 @@ export default class Body extends Component {
         )}
 
         {formats.length ? <FlagsReferenceTable entries={flags} /> : null}
-        <script src="/bundle.js" />
-      </body>
+      </div>
     )
   }
 }

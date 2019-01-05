@@ -1,6 +1,5 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { findDOMNode } from "react-dom"
+import { Component } from "preact"
+// import PropTypes from "prop-types"
 
 import ColoredText from "./ColoredText"
 import FormattedDate from "./FormattedDate"
@@ -19,48 +18,46 @@ const ColoredFormat = ({ format, regex, convertToDate: date, ...props }) => (
   <span {...props}>
     {format
       .split(regex)
-      .map(
-        (part, i) =>
-          part.match(regex) ? (
-            <ColoredFormatPart key={i} format={part} convertToDate={date} />
-          ) : (
-            <span key={i}>{part}</span>
-          )
+      .map((part, i) =>
+        part.match(regex) ? (
+          <ColoredFormatPart key={i} format={part} convertToDate={date} />
+        ) : (
+          <span key={i}>{part}</span>
+        )
       )}
   </span>
 )
 
 export default class Repl extends Component {
-  static propTypes = {
-    value: PropTypes.string,
-    formats: PropTypes.arrayOf(PropTypes.string),
-    flags: PropTypes.arrayOf(PropTypes.string),
-    date: PropTypes.instanceOf(Date).isRequired,
-    onChange: PropTypes.func
-  }
+  // static propTypes = {
+  //   value: PropTypes.string,
+  //   formats: PropTypes.arrayOf(PropTypes.string),
+  //   flags: PropTypes.arrayOf(PropTypes.string),
+  //   date: PropTypes.instanceOf(Date).isRequired,
+  //   onChange: PropTypes.func
+  // }
 
-  static defaultProps = {
-    value: "",
-    formats: [],
-    flags: [],
-    onChange: () => {}
-  }
-
-  state = {
-    format: this.props.value
-  }
+  // static defaultProps = {
+  //   value: "",
+  //   formats: [],
+  //   flags: [],
+  //   onChange: () => {}
+  // }
 
   constructor(props) {
     super(props)
+
+    this.state = {
+      format: this.props.value
+    }
 
     this.handleChange = this.handleChange.bind(this)
   }
 
   componentDidMount() {
     // Set focus at the end of input
-    const node = findDOMNode(this.refs.input)
-    node.focus()
-    node.selectionStart = node.selectionEnd = node.value.length
+    this.input.focus()
+    this.input.selectionStart = this.input.selectionEnd = this.input.value.length
   }
 
   handleChange(event) {
@@ -70,13 +67,16 @@ export default class Repl extends Component {
   }
 
   render() {
-    const { props: { date, flags, formats, value }, state: { format } } = this
+    const {
+      props: { date, flags, formats, value },
+      state: { format }
+    } = this
     const regex = outputRegex(flags, formats)
 
     return (
       <div className="repl">
         <div className="repl-row">
-          <label className="repl-label" for="repl-input">
+          <label className="repl-label" htmlFor="repl-input">
             Input
           </label>
           <div className="repl-field">
@@ -87,11 +87,11 @@ export default class Repl extends Component {
             />
             <input
               type="text"
-              ref="input"
+              ref={input => (this.input = input)}
               value={format}
               id="repl-input"
               className="repl-io repl-input"
-              onChange={this.handleChange}
+              onInput={this.handleChange}
               placeholder={`Type a format string here, .e.g ${value}`}
             />
           </div>

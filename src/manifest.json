@@ -1,0 +1,16 @@
+{
+  "name": "Quick strftime reference and REPL",
+  "short_name": "strftime",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#fff",
+  "theme_color": "#0277bd",
+  "icons": [
+    {
+      "src": "/assets/icons-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}

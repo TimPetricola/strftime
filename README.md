@@ -7,18 +7,19 @@ This is the source of [strftime.ninja](http://strftime.ninja). Strftime is a ref
 ### Install dependencies
 
 ```
-npm install -g webpack-dev-server webpack eslint
 npm install
 ```
 
 ### Dev
 
 The dev script will start a server at `http://localhost:8080` and compile assets on the fly:
+
 ```
-npm run dev
+npm run start
 ```
 
 You can lint the JS with:
+
 ```
 npm run lint
 ```

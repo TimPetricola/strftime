@@ -1,0 +1,29 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+body {
+  width: 960px;
+  max-width: 100%;
+  margin: 0 auto;
+  background-color: var(--background-color);
+  color: rgba(0, 0, 0, 0.87);
+}
+
+code {
+  font-family: var(--monospace);
+}
+
+.full-width {
+  width: 100%;
+}

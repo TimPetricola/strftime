@@ -1,4 +1,3 @@
-import React, { Component } from "react"
 import PropTypes from "prop-types"
 
 const Row = ({ entry: { flag, label } }) => (
@@ -18,7 +17,11 @@ const Table = ({ entries }) => (
         <th className="full-width">Meaning</th>
       </tr>
     </thead>
-    <tbody>{entries.map(e => <Row key={e.flag} entry={e} />)}</tbody>
+    <tbody>
+      {entries.map(e => (
+        <Row key={e.flag} entry={e} />
+      ))}
+    </tbody>
   </table>
 )
 
