@@ -16,6 +16,7 @@ const Search = ({ query, onChange }) => (
       value={query}
       onInput={onChange}
       placeholder="Search"
+      aria-label="Search"
     />
   </label>
 )
