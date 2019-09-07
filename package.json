@@ -4,10 +4,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "start": "if-env NODE_ENV=production && npm run -s serve || npm run -s dev",
-    "build": "preact build --template src/template.html",
-    "serve": "preact build --template src/template.html && preact serve",
-    "dev": "preact watch --template src/template.html",
+    "dev": "next",
+    "build": "next build && next export",
     "lint": "eslint src"
   },
   "eslintIgnore": [
@@ -20,13 +18,14 @@
     "eslint-config-synacor": "^3.0.4",
     "if-env": "^1.0.0",
     "postcss-custom-properties": "^9.0.1",
-    "postcss-import": "^12.0.1",
-    "preact-cli": "^2.2.1"
+    "postcss-import": "^12.0.1"
   },
   "dependencies": {
-    "preact": "^8.2.1",
-    "preact-compat": "^3.19.0",
+    "@zeit/next-css": "^1.0.1",
+    "next": "^9.0.5",
     "randomcolor": "^0.5.4",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
     "strftime": "^0.10.0"
   }
 }

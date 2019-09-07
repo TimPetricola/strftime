@@ -1,4 +1,4 @@
-import { Component } from "preact"
+import { Component } from "react"
 
 import { searchReference } from "../utils"
 
@@ -14,7 +14,7 @@ const Search = ({ query, onChange }) => (
       className="search-input"
       type="text"
       value={query}
-      onInput={onChange}
+      onChange={onChange}
       placeholder="Search"
       aria-label="Search"
     />

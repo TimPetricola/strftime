@@ -1,4 +1,4 @@
-import { Component } from "preact"
+import { Component } from "react"
 // import PropTypes from "prop-types"
 
 import ColoredText from "./ColoredText"
@@ -91,7 +91,7 @@ export default class Repl extends Component {
               value={format}
               id="repl-input"
               className="repl-io repl-input"
-              onInput={this.handleChange}
+              onChange={this.handleChange}
               placeholder={`Type a format string here, .e.g ${value}`}
             />
           </div>
