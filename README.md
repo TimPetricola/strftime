@@ -12,10 +12,10 @@ npm install
 
 ### Dev
 
-The dev script will start a server at `http://localhost:8080` and compile assets on the fly:
+The dev script will start a server at `http://localhost:3000`.
 
 ```
-npm run start
+npm run rev
 ```
 
 You can lint the JS with:
@@ -26,10 +26,8 @@ npm run lint
 
 ### Build
 
-To prepare a deploy, run:
+To create a static build, run:
 
 ```
 npm run build
 ```
-
-This script will create a new version of `index.html`, `bundle.css` and `bundle.js` to be used as static assets.
