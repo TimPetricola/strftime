@@ -1,20 +1,34 @@
-import { Component } from "react"
-// import PropTypes from "prop-types"
+import { Component, createRef, HTMLProps, ChangeEvent } from "react"
 
 import ColoredText from "./ColoredText"
 import FormattedDate from "./FormattedDate"
 
-function outputRegex(flags, formats) {
+function outputRegex(flags: string[], formats: string[]) {
   return new RegExp(`(%(?:${flags.join("|")})?(?:${formats.join("|")}))`)
 }
 
-const ColoredFormatPart = ({ format, convertToDate: date }) => (
+const ColoredFormatPart = ({
+  format,
+  convertToDate: date
+}: {
+  format: string
+  convertToDate?: Date
+}) => (
   <ColoredText colorKey={format}>
     {date ? <FormattedDate format={format} date={date} /> : format}
   </ColoredText>
 )
 
-const ColoredFormat = ({ format, regex, convertToDate: date, ...props }) => (
+const ColoredFormat = ({
+  format,
+  regex,
+  convertToDate: date,
+  ...props
+}: {
+  format: string
+  regex: RegExp
+  convertToDate?: Date
+} & HTMLProps<HTMLSpanElement>) => (
   <span {...props}>
     {format
       .split(regex)
@@ -28,23 +42,20 @@ const ColoredFormat = ({ format, regex, convertToDate: date, ...props }) => (
   </span>
 )
 
-export default class Repl extends Component {
-  // static propTypes = {
-  //   value: PropTypes.string,
-  //   formats: PropTypes.arrayOf(PropTypes.string),
-  //   flags: PropTypes.arrayOf(PropTypes.string),
-  //   date: PropTypes.instanceOf(Date).isRequired,
-  //   onChange: PropTypes.func
-  // }
+type Props = {
+  value: string
+  formats: string[]
+  flags: string[]
+  date: Date
+  onChange: (format: string) => void
+}
 
-  // static defaultProps = {
-  //   value: "",
-  //   formats: [],
-  //   flags: [],
-  //   onChange: () => {}
-  // }
+type State = { format: string }
 
-  constructor(props) {
+export default class Repl extends Component<Props, State> {
+  private input = createRef<HTMLInputElement>()
+
+  constructor(props: Props) {
     super(props)
 
     this.state = {
@@ -55,12 +66,14 @@ export default class Repl extends Component {
   }
 
   componentDidMount() {
-    // Set focus at the end of input
-    this.input.focus()
-    this.input.selectionStart = this.input.selectionEnd = this.input.value.length
+    if (this.input.current) {
+      // Set focus at the end of input
+      this.input.current.focus()
+      this.input.current.selectionStart = this.input.current.selectionEnd = this.input.current.value.length
+    }
   }
 
-  handleChange(event) {
+  handleChange(event: ChangeEvent<HTMLInputElement>) {
     const format = event.target.value
     this.setState({ format: format })
     this.props.onChange(format)
@@ -87,7 +100,7 @@ export default class Repl extends Component {
             />
             <input
               type="text"
-              ref={input => (this.input = input)}
+              ref={this.input}
               value={format}
               id="repl-input"
               className="repl-io repl-input"

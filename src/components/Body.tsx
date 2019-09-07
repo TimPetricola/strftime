@@ -1,4 +1,4 @@
-import { Component } from "react"
+import { Component, createRef } from "react"
 
 import { searchReference } from "../utils"
 
@@ -6,23 +6,48 @@ import Icon from "./Icon"
 import Repl from "./Repl"
 import FormatsReferenceTable from "./FormatsReferenceTable"
 import FlagsReferenceTable from "./FlagsReferenceTable"
+import { FormatConfig, FlagConfig } from "../types"
 
-const Search = ({ query, onChange }) => (
+const Search = ({
+  query,
+  onChange
+}: {
+  query: string
+  onChange: (value: string) => void
+}) => (
   <label className="search-field">
     <Icon icon="search" className="search-icon" />
     <input
       className="search-input"
       type="text"
       value={query}
-      onChange={onChange}
+      onChange={e => onChange(e.target.value)}
       placeholder="Search"
       aria-label="Search"
     />
   </label>
 )
 
-export default class Body extends Component {
-  constructor(props) {
+type Props = {
+  date: Date
+  format: string
+  formats: FormatConfig[]
+  flags: FlagConfig[]
+}
+
+type State = {
+  hasRepl: boolean
+  hasSearch: boolean
+  bodyPaddingBottom: number
+  searchQuery: string
+  date: Date
+}
+
+export default class Body extends Component<Props, State> {
+  private repl = createRef<HTMLDivElement>()
+  private timeInterval?: NodeJS.Timeout
+
+  constructor(props: Props) {
     super(props)
 
     this.state = {
@@ -30,7 +55,7 @@ export default class Body extends Component {
       hasSearch: false, // do not render search on the backend
       bodyPaddingBottom: 0,
       searchQuery: "",
-      date: new Date(this.props.date)
+      date: this.props.date
     }
 
     this.resetDate = this.resetDate.bind(this)
@@ -53,14 +78,14 @@ export default class Body extends Component {
     this.timeInterval = setInterval(this.resetDate, 1000)
   }
 
-  componentDidUpdate(prevProps, prevState) {
+  componentDidUpdate(prevProps: Props, prevState: State) {
     if (prevState.hasRepl !== this.state.hasRepl) {
       this.setBodyPadding()
     }
   }
 
   componentWillUnmount() {
-    clearInterval(this.timeInterval)
+    if (this.timeInterval) clearInterval(this.timeInterval)
   }
 
   resetDate() {
@@ -70,16 +95,16 @@ export default class Body extends Component {
   // REPL takes some room at the bottom of the page, padding is needed
   // to see bottom of reference
   setBodyPadding() {
-    const padding = this.repl ? this.repl.offsetHeight : 0
+    const padding = this.repl.current ? this.repl.current.offsetHeight : 0
 
     if (padding !== this.state.bodyPaddingBottom) {
       this.setState({ bodyPaddingBottom: padding })
     }
   }
 
-  handleSearchChange(event) {
+  handleSearchChange(newValue: string) {
     this.setState({
-      searchQuery: event.target.value
+      searchQuery: newValue
     })
   }
 
@@ -117,7 +142,7 @@ export default class Body extends Component {
         </header>
 
         {hasRepl ? (
-          <div className="repl-container" ref={repl => (this.repl = repl)}>
+          <div className="repl-container" ref={this.repl}>
             <Repl
               value={format}
               formats={formats.map(format => format.format)}

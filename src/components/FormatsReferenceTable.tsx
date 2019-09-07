@@ -1,8 +1,13 @@
-import PropTypes from "prop-types"
-
 import FormattedDate from "./FormattedDate"
+import { FormatConfig } from "../types"
 
-const Row = ({ date, entry: { format, label } }) => (
+const Row = ({
+  date,
+  entry: { format, label }
+}: {
+  date: Date
+  entry: FormatConfig
+}) => (
   <tr>
     <td>
       <code>%{format}</code>
@@ -14,7 +19,12 @@ const Row = ({ date, entry: { format, label } }) => (
   </tr>
 )
 
-const Table = ({ entries, date }) => (
+type Props = {
+  entries: FormatConfig[]
+  date: Date
+}
+
+const Table = ({ entries, date }: Props) => (
   <table className="reference-table">
     <thead>
       <tr>
@@ -30,14 +40,5 @@ const Table = ({ entries, date }) => (
     </tbody>
   </table>
 )
-
-Table.propTypes = {
-  entries: PropTypes.arrayOf(
-    PropTypes.shape({
-      format: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired
-    })
-  ).isRequired
-}
 
 export default Table

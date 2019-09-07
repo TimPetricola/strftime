@@ -1,6 +1,6 @@
-import PropTypes from "prop-types"
+import { FlagConfig } from "../types"
 
-const Row = ({ entry: { flag, label } }) => (
+const Row = ({ entry: { flag, label } }: { entry: FlagConfig }) => (
   <tr key={flag}>
     <td>
       <code>{flag}</code>
@@ -9,7 +9,9 @@ const Row = ({ entry: { flag, label } }) => (
   </tr>
 )
 
-const Table = ({ entries }) => (
+type Props = { entries: FlagConfig[] }
+
+const Table = ({ entries }: Props) => (
   <table className="reference-table">
     <thead>
       <tr>
@@ -24,14 +26,5 @@ const Table = ({ entries }) => (
     </tbody>
   </table>
 )
-
-Table.propTypes = {
-  entries: PropTypes.arrayOf(
-    PropTypes.shape({
-      flag: PropTypes.string.isRequired,
-      label: PropTypes.string.isRequired
-    })
-  ).isRequired
-}
 
 export default Table

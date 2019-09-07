@@ -1,5 +1,5 @@
 {
-  "parser": "babel-eslint",
+  "parser": "@typescript-eslint/parser",
   "env": {
     "es6": true,
     "browser": true
@@ -14,9 +14,18 @@
     }
   },
   "extends": ["eslint:recommended", "plugin:react/recommended"],
-  "plugins": ["react"],
+  "plugins": ["react", "@typescript-eslint"],
   "rules": {
     "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "args": "after-used",
+        "ignoreRestSiblings": false
+      }
+    ]
   }
 }

@@ -8,5 +8,5 @@ const props = {
 }
 
 export default function App() {
-  return <Body {...props} formats={formats} flags={flags} />
+  return <Body formats={formats} flags={flags} {...props} />
 }

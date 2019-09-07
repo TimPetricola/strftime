@@ -1,8 +1,9 @@
 import randomColor from "randomcolor"
 
-export const color = key => randomColor({ luminosity: "light", seed: key })
+export const color = (key: string): string =>
+  randomColor({ luminosity: "light", seed: key })
 
-export function searchReference(q, entries) {
+export function searchReference(q: string, entries: any[]) {
   q = q.toLowerCase().trim()
 
   if (!q.length || q === "%") {
