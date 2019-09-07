@@ -1,4 +1,4 @@
-import { Component, createRef, HTMLProps, ChangeEvent } from "react"
+import { HTMLProps, ChangeEvent, useState, useRef, useEffect } from "react"
 
 import ColoredText from "./ColoredText"
 import FormattedDate from "./FormattedDate"
@@ -50,78 +50,65 @@ type Props = {
   onChange: (format: string) => void
 }
 
-type State = { format: string }
+const Repl = ({
+  date,
+  flags,
+  formats,
+  onChange,
+  value: initialFormat
+}: Props) => {
+  const [format, setFormat] = useState(initialFormat)
+  const inputEl = useRef<HTMLInputElement>(null)
 
-export default class Repl extends Component<Props, State> {
-  private input = createRef<HTMLInputElement>()
-
-  constructor(props: Props) {
-    super(props)
-
-    this.state = {
-      format: this.props.value
+  useEffect(() => {
+    if (inputEl.current) {
+      inputEl.current.focus()
+      inputEl.current.selectionStart = inputEl.current.selectionEnd =
+        inputEl.current.value.length
     }
+  }, [])
 
-    this.handleChange = this.handleChange.bind(this)
-  }
-
-  componentDidMount() {
-    if (this.input.current) {
-      // Set focus at the end of input
-      this.input.current.focus()
-      this.input.current.selectionStart = this.input.current.selectionEnd = this.input.current.value.length
-    }
-  }
-
-  handleChange(event: ChangeEvent<HTMLInputElement>) {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const format = event.target.value
-    this.setState({ format: format })
-    this.props.onChange(format)
+    setFormat(format)
+    onChange(format)
   }
 
-  render() {
-    const {
-      props: { date, flags, formats, value },
-      state: { format }
-    } = this
-    const regex = outputRegex(flags, formats)
+  const regex = outputRegex(flags, formats)
 
-    return (
-      <div className="repl">
-        <div className="repl-row">
-          <label className="repl-label" htmlFor="repl-input">
-            Input
-          </label>
-          <div className="repl-field">
-            <ColoredFormat
-              regex={regex}
-              format={format}
-              className="repl-io repl-highlight"
-            />
-            <input
-              type="text"
-              ref={this.input}
-              value={format}
-              id="repl-input"
-              className="repl-io repl-input"
-              onChange={this.handleChange}
-              placeholder={`Type a format string here, .e.g ${value}`}
-            />
-          </div>
-        </div>
-        <div className="repl-row">
-          <span className="repl-label">Output</span>
-          <div className="repl-field">
-            <code className="repl-io">
-              <ColoredFormat
-                regex={regex}
-                format={format}
-                convertToDate={date}
-              />
-            </code>
-          </div>
+  return (
+    <div className="repl">
+      <div className="repl-row">
+        <label className="repl-label" htmlFor="repl-input">
+          Input
+        </label>
+        <div className="repl-field">
+          <ColoredFormat
+            regex={regex}
+            format={format}
+            className="repl-io repl-highlight"
+          />
+          <input
+            type="text"
+            ref={inputEl}
+            value={format}
+            id="repl-input"
+            className="repl-io repl-input"
+            onChange={handleChange}
+            placeholder={`Type a format string here, .e.g ${format}`}
+          />
         </div>
       </div>
-    )
-  }
+      <div className="repl-row">
+        <span className="repl-label">Output</span>
+        <div className="repl-field">
+          <code className="repl-io">
+            <ColoredFormat regex={regex} format={format} convertToDate={date} />
+          </code>
+        </div>
+      </div>
+    </div>
+  )
 }
+
+export default Repl
