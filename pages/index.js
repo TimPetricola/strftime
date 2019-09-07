@@ -2,7 +2,7 @@ import Head from "next/head"
 
 import App from "../src/components/App"
 
-import manifest from "../src/manifest.json"
+import manifest from "../static/manifest.json"
 
 import "../src/styles/index.css"
 
@@ -22,10 +22,8 @@ function Home() {
         <meta name="viewport" content="width=device-width,initial-scale=1" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
-        {/* <link
-      rel="manifest"
-      href="<%= htmlWebpackPlugin.files.publicPath %>manifest.json"
-    /> */}
+        <link rel="icon" href="/static/favicon.ico" />
+        <link rel="manifest" href="/static/manifest.json" />
         <meta name="theme-color" content={manifest.theme_color} />
       </Head>
       <App />
