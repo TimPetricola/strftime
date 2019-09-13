@@ -15,7 +15,7 @@
     "@types/node": "^12.7.5",
     "@types/react": "^16.9.2",
     "@typescript-eslint/eslint-plugin": "^2.2.0",
-    "@typescript-eslint/parser": "^2.1.0",
+    "@typescript-eslint/parser": "^2.2.0",
     "autoprefixer": "^9.6.0",
     "eslint": "^6.0.1",
     "eslint-config-synacor": "^3.0.4",
