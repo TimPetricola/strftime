@@ -28,7 +28,7 @@
     "@zeit/next-css": "^1.0.1",
     "next": "^9.0.7",
     "randomcolor": "^0.5.4",
-    "react": "^16.9.0",
+    "react": "^16.10.1",
     "react-dom": "^16.10.1",
     "strftime": "^0.10.0"
   }
