@@ -29,7 +29,7 @@
     "next": "^9.0.8",
     "randomcolor": "^0.5.4",
     "react": "^16.10.1",
-    "react-dom": "^16.10.1",
+    "react-dom": "^16.10.2",
     "strftime": "^0.10.0"
   }
 }
