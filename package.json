@@ -13,7 +13,7 @@
   ],
   "devDependencies": {
     "@types/node": "^12.12.14",
-    "@types/react": "^16.9.15",
+    "@types/react": "^16.9.16",
     "@typescript-eslint/eslint-plugin": "^2.10.0",
     "@typescript-eslint/parser": "^2.10.0",
     "autoprefixer": "^9.7.3",
